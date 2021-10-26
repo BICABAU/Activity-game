@@ -1,0 +1,45 @@
+.mission-container {
+  display: flex;
+  height: 70vh;
+  flex-direction: column;
+}
+
+.header-mission {
+  padding: 40px 0px 20px 0px;
+  font-size: 25px;
+  display: flex;
+}
+
+.mission-info-container {
+  display: flex;
+  grid-gap: 20px;
+  padding: 10px 0px 10px 0px;
+}
+.mission-info-container div {
+  font-size: 18px;
+  font-weight: bold;
+  padding: 20px 10px 20px 10px;
+  border: 1px solid black;
+  border-radius: 10px;
+  display: flex;
+  width: 20vw;
+  justify-content: space-between;
+  align-items: space-between;
+}
+
+.mission-space {
+  display: flex;
+  padding: 0px 100px 0px 100px;
+  width: 100%;
+  justify-content: flex-end;
+  flex-direction: column;
+}
+
+/* Começo da estilização das Missões */
+
+/* Fim da estilização das Missões */
+.mission-box-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
