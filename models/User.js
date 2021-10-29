@@ -3,8 +3,32 @@ const bcrypt = require("bcryptjs")
 // const moment = require("moment")
 
 
-let User = function (data) {
-    this.data = data;
+let User = function ({
+    matriculation,
+    password,
+    first_name,
+    last_name,
+    email,
+    cpf,
+    phone,
+    birthdate,
+    complementary_activity,
+    extension_acitivity,
+    points_total_amount,
+    id_course
+}) {
+    this.matriculation = matriculation,
+        this.password = password,
+        this.first_name = first_name,
+        this.last_name = last_name,
+        this.email = email,
+        this.cpf = cpf,
+        this.phone = phone,
+        this.birthdate = birthdate,
+        this.complementary_activity = complementary_activity,
+        this.extension_acitivity = extension_acitivity,
+        this.points_total_amount = points_total_amount,
+        this.id_course = id_course
     this.errors = []
 }
 
@@ -75,5 +99,19 @@ User.prototype.alterarDados = function () {
         });
     });
 };
+
+User.prototype.getTotalHours = function () {
+    /**
+     * Fazer um select e retornar somente as
+     * -> Horas Complementares
+     * -> Horas de extensão
+     */
+}
+
+User.prototype.countComplementaryHours = function () { }
+
+User.prototype.countExtensionHours = function () { }
+
+User.prototype.countAmountPoints = function () { }
 
 module.exports = User
