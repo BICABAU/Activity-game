@@ -1,11 +1,12 @@
 const pool = require("../config/db");
 
-let TipoCurso = function (data) {
-  this.data = data;
+let CourseType = function ({ name, description }) {
+  this.name = name;
+  this.description = name;
   this.errors = [];
 }
 
-TipoCurso.prototype.recuperarTiposCursos = function () {
+CourseType.prototype.recuperarTiposCursos = function () {
   const consulta = 'select * from tipo_curso'
   const values = []
   return new Promise((resolve, reject) => {
@@ -22,4 +23,9 @@ TipoCurso.prototype.recuperarTiposCursos = function () {
   });
 };
 
-module.exports = TipoCurso;
+// Não implementado
+CourseType.prototype.create = function () {
+
+}
+
+module.exports = CourseType;
