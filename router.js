@@ -58,7 +58,7 @@ router.get('/apagarCertificadoACs/:nome', mustBeLoggedIn, certificadosAcsControl
 router.get('/apagarCertificadoAEs/:nome', mustBeLoggedIn, certificadosAesController.apagarCertificadoAes)
 
 //roteamento JSON
-router.get('/cursos_json/:id_tipo_curso_fk', requisicoesJsonController.cursos_json)
+router.get('/cursos_json/:id_course_types', requisicoesJsonController.cursos_json)
 router.get('/subcategorias_json/:id_tipo_atividade_acs_fk', requisicoesJsonController.subcategorias_json)
 
 module.exports = router

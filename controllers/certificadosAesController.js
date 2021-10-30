@@ -1,4 +1,4 @@
-const Certificado = require('../models/Certificado');
+
 
 exports.uploadAes = function (req, res) {
     let certificados = new Certificado(req.file, req.body, req.session.user.email)

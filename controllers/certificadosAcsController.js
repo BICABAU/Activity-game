@@ -1,4 +1,4 @@
-const Certificado = require('../models/Certificado');
+
 
 
 exports.uploadsAcs = function (req, res) {

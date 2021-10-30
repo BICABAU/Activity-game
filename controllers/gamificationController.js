@@ -1,4 +1,4 @@
-const Gamification = require('../models/Gamification');
+
 
 exports.ranking = function (req, res) {
     let top_ranking = new Gamification(null, req.session.user.curso)
