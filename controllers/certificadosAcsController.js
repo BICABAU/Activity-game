@@ -1,12 +1,9 @@
-
-
-
 exports.uploadsAcs = function (req, res) {
     let certificados = new Certificado(req.file, req.body, req.session.user.email)
     certificados
         .create().then(certificados.contabilizarHorasACs())
         .then((result) => {
-            res.redirect('atividadesComplementares') 
+            res.redirect('atividadesComplementares')
         })
         .catch((err) => {
             res.send('err')
