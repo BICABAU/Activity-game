@@ -1,11 +1,10 @@
-const Certificado = require('../models/Certificado');
-const User = require('../models/User')
-const Curso = require('../models/Curso')
+const Certificado = require('../models/Certificado')
+const Course = require('../models/Course')
 
 
 exports.cursos_json = function (req, res) {
-  let curso = new Curso()
-  curso.recuperarCursos(req.params.id_tipo_curso_fk)
+  let course = new Course()
+  course.recuperarCursos(req.params.id_course_types)
     .then((cursos_recuperados) => {
       res.json({ cursos_recuperados: cursos_recuperados })
     })
