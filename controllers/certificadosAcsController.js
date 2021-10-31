@@ -6,7 +6,7 @@ exports.uploadsAcs = function (req, res) {
             res.redirect('atividadesComplementares')
         })
         .catch((err) => {
-            res.send('err')
+            res.send(err)
         })
 };
 
