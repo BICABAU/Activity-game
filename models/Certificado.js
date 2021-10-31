@@ -44,8 +44,8 @@ Certificado.prototype.readCatAcsSubCategoria = function (acs) {
 };
 
 Certificado.prototype.readAllACs = function () {
-    const consulta = "SELECT * FROM certificados u where u.email_fk=$1 and u.tipo_de_atividade='Atividades Complementares'";
-    const values = [this.email]
+    const consulta = "select id_certification, description, activity_start, activity_end, amount_hours, id_activity, id_uploaded from certifications inner join users on (id_user = $1)";
+    const values = [this.id_users]
     return new Promise((resolve, reject) => {
         pool.query(consulta, values, (error, results) => {
             if (error) {
