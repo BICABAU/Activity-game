@@ -10,6 +10,7 @@ const userController = require('./controllers/userController')
 const sessaoController = require('./controllers/sessaoController')
 const certificadosAcsController = require('./controllers/certificadosAcsController')
 const certificadosAesController = require('./controllers/certificadosAesController')
+const certificationController = require('./controllers/certificationsController');
 const postController = require('./controllers/postController')
 const requisicoesJsonController = require('./controllers/requisicoesJsonController');
 const cursosController = require('./controllers/cursosController');
@@ -35,7 +36,7 @@ router.get('/ranking', mustBeLoggedIn, gamificationController.ranking)
 router.get('/missoes', mustBeLoggedIn, missoesController.missoes)
 router.get('/missoesSemanais', mustBeLoggedIn, missoesSemanaisController.missoesSemanais)
 // roteamento de patch_notes
-router.get('/atualizacoes', mustBeLoggedIn,userController.patchNotes)
+router.get('/atualizacoes', mustBeLoggedIn, userController.patchNotes)
 //roteamento de SESSÃO
 router.post('/login', sessaoController.login)
 router.get('/logout', sessaoController.logout)
@@ -60,5 +61,10 @@ router.get('/apagarCertificadoAEs/:nome', mustBeLoggedIn, certificadosAesControl
 //roteamento JSON
 router.get('/cursos_json/:id_course_types', requisicoesJsonController.cursos_json)
 router.get('/subcategorias_json/:id_tipo_atividade_acs_fk', requisicoesJsonController.subcategorias_json)
+
+/**
+ * Validando as rotas
+ */
+router.post('/certification', certificationController.uploadCertification);
 
 module.exports = router

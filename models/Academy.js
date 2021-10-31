@@ -1,6 +1,6 @@
 const pool = require("../config/db");
 
-let Academies = function ({ name, initials, city, uf }) {
+let Academy = function ({ name, initials, city, uf }) {
   this.name = name
   this.initials = initials
   this.city = city
@@ -8,7 +8,7 @@ let Academies = function ({ name, initials, city, uf }) {
   this.errors = [];
 }
 
-Academies.prototype.recuperarAcademies = function () {
+Academy.prototype.recuperarAcademies = function () {
   const consulta = 'SELECT * from cursos inner join tipo_curso' +
     ' ON (cursos.id_tipo_curso_fk = tipo_curso.id_tipo_curso)' +
     ` WHERE id_tipo_curso_fk = ${tipo_curso}`
@@ -29,6 +29,6 @@ Academies.prototype.recuperarAcademies = function () {
 };
 
 // Não implementado
-Academies.prototype.create = function () { }
+Academy.prototype.create = function () { }
 
-module.exports = Academies;
+module.exports = Academy;
