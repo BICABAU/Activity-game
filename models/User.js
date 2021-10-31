@@ -30,7 +30,6 @@ let User = function ({
     this.errors = []
 }
 
-
 User.prototype.create = function () {
     let salt = bcrypt.genSaltSync(10)
     this.password_hash = bcrypt.hashSync(this.password_hash, salt)

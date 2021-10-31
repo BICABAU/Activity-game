@@ -1,13 +1,13 @@
 /**
  * EU quero salvar um novo certificado e automaticamente fazer o usuario concluir a missão
  *
- * [] - Salvar o caminho do arquivo com UPLOADED-CERTIFICATION
- * [] - Salvar dados do certificado em CERTIFICATION
- *  [] - Buscar usuário
+ * [0] - Salvar o caminho do arquivo com UPLOADED-CERTIFICATION
+ * [0] - Salvar dados do certificado em CERTIFICATION
+ *  [0] - Buscar usuário
  *  [] - Validar atividade
- * [] - Buscar uma missão equivalente a atividade do certificado - MISSION
- * [] - Salvar essa missão em FINISHED-MISSION
- * [] - Contabilizar os pontos em USER
+ * [0] - Buscar uma missão equivalente a atividade do certificado - MISSION
+ * [0] - Salvar essa missão em FINISHED-MISSION
+ * [0] - Contabilizar os pontos em USER
  */
 
 const User = require('../models/User');
@@ -42,20 +42,25 @@ exports.uploadCertification = function (req, res) {
     .then(file_uploaded => {
       console.log(file_uploaded)
 
-      const certification = new Certification(certification_name, description, activity_start, activity_end, amount_hours, id_activity, file_uploaded,)
+      const searched_user = user.readByEmail(req.session.user.email)
+        .then(result => {
+          if (!searched_user) {
+            return new Error('User doesnt found')
+          }
+
+          console.log(result)
+
+          return result
+        })
+        .catch(err => console.log(err))
+
+      const certification = new Certification(certification_name, description, activity_start, activity_end, amount_hours, id_activity, file_uploaded.id,)
       certification.create()
         .then(certification_created => {
-          const searched_user = user.readByEmail(req.session.user.email)
-            .then(result => {
-              console.log(result)
-
-              return result
-            })
-            .catch(err => console.log(err))
 
           mission.missionValidate(searched_user.id, certification_created.id)
             .then((mission_validated) => {
-              console.log(result)
+              console.log(mission_validated)
 
               finishedMission.create(mission_validated.id, searched_user.id)
                 .then((finished_mission_created) => {
@@ -69,6 +74,7 @@ exports.uploadCertification = function (req, res) {
             .catch(err => console.log(err))
         }
         )
+        .catch(err => console.log(err))
     })
     .catch(err => console.log(err))
 

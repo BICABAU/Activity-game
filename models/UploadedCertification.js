@@ -1,20 +1,23 @@
 const pool = require("../config/db")
 
-let UploadedCertifications = (key_name, size, url, name) => {
+const UploadedCertification = (key_name, size, url, name) => {
   this.key_name = key_name;
   this.name = name;
   this.size = size;
   this.url = url;
+
+  console.log(UploadedCertification)
 }
 
-UploadedCertifications.prototype.listAll = () => {
+UploadedCertification.prototype.listAll = function () {
   /**
    * Listar todos os arquivos upados no servidor com JOIN em usuarios
    * para mostrar os respectivos "donos"
    */
+  return 'oi';
 }
 
-UploadedCertifications.prototype.create = () => {
+UploadedCertification.prototype.create = function () {
   const insert = 'INSERT INTO uploaded_certifications' +
     ' (key_name, size, url, name)' +
     ' VALUES ($1, $2, $3, $4)' +
@@ -33,18 +36,21 @@ UploadedCertifications.prototype.create = () => {
   })
 }
 
-UploadedCertifications.prototype.delete = (id_user, id_uploaded) => {
+UploadedCertification.prototype.delete = (id_user, id_uploaded) => {
+  /**
+   * Só pode deletar um arquivo se for o mesmo usuario que upou
+   */
+  return 'oi';
+
+}
+
+UploadedCertification.prototype.deleteAWS = (id_user, id_uploaded) => {
   /**
    * Só pode deletar um arquivo se for o mesmo usuario que upou
    */
 
-}
-
-UploadedCertifications.prototype.deleteAWS = (id_user, id_uploaded) => {
-  /**
-   * Só pode deletar um arquivo se for o mesmo usuario que upou
-   */
+  return 'oi';
 
 }
 
-module.exports = UploadedCertifications;
+module.exports = UploadedCertification;
