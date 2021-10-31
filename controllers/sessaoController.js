@@ -6,19 +6,16 @@ exports.login = function (req, res) {
     .login()
     .then((result) => {
       req.session.user = {
-        nome: usuarioRecuperado.nome,
-        sobrenome: usuarioRecuperado.sobrenome,
-        curso: usuarioRecuperado.curso,
-        email: user.data.email,
+        first_name: usuarioRecuperado.first_name,
+        last_name: usuarioRecuperado.last_name,
+        email: usuarioRecuperado.email,
         cpf: usuarioRecuperado.cpf,
-        telefone: usuarioRecuperado.telefone,
-        instituicao: usuarioRecuperado.instituicao,
-        cidade: usuarioRecuperado.cidade,
-        senha: user.data.senha,
-        nascimento: usuarioRecuperado.nascimento,
-        horas_acs: usuarioRecuperado.horas_acs,
-        horas_aes: usuarioRecuperado.horas_aes,
-        matricula: usuarioRecuperado.matricula
+        phone: usuarioRecuperado.phone,
+        password_hash: usuarioRecuperado.password_hash,
+        birthdate: usuarioRecuperado.birthdate,
+        complementary_activity: usuarioRecuperado.complementary_activity,
+        extension_activity: usuarioRecuperado.extension_activity,
+        matriculation: usuarioRecuperado.matriculation
       }
       req.session.save(() => {
         res.redirect('/home')
