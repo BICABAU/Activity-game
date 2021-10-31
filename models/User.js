@@ -28,7 +28,7 @@ let User = function ({
         this.complementary_activity = complementary_activity,
         this.extension_acitivity = extension_acitivity,
         this.points_total_amount = points_total_amount,
-        this.curso= curso
+        this.curso= curso,
     this.errors = []
 }
 
@@ -55,10 +55,9 @@ User.prototype.create = function () {
 User.prototype.login = function () {
     return new Promise((resolve, reject) => {
         this.readByEmail().then((usuarioRecuperado) => {
-            if (usuarioRecuperado && bcrypt.compareSync(this.data.senha, usuarioRecuperado.senha)) {
+            if (usuarioRecuperado && bcrypt.compareSync(this.password_hash, usuarioRecuperado.password_hash)) {
                 resolve('Login confere')
             } else {
-
                 reject('Dados de login não conferem')
             }
         }).catch(() => { });
@@ -67,7 +66,7 @@ User.prototype.login = function () {
 
 User.prototype.readByEmail = function () {
     const consulta = "SELECT * FROM users u WHERE u.email= $1";
-    const values = [this.data.email];
+    const values = [this.email];
 
     return new Promise((resolve, reject) => {
         pool.query(consulta, values, (error, results) => {
