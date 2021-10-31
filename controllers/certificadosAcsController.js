@@ -1,4 +1,4 @@
-
+const Certificado = require('../models/Certificado')
 
 
 exports.uploadsAcs = function (req, res) {
@@ -14,7 +14,7 @@ exports.uploadsAcs = function (req, res) {
 };
 
 exports.getAllAcs = function (req, res) {
-    let certificado = new Certificado(req.file, null, req.session.user.email)
+    let certificado = new Certificado(req.file, null)
     certificado
         .readAllACs()
         .then((resultado) => {
