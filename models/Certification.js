@@ -1,6 +1,6 @@
 const pool = require("../config/db")
 
-let Certification = ({
+let Certification = function ({
   certification_name,
   description,
   activity_start,
@@ -9,7 +9,7 @@ let Certification = ({
   id_activity,
   id_uploaded,
   id_user
-}) => {
+}) {
   this.name = certification_name;
   this.description = description;
   this.activity_start = activity_start;

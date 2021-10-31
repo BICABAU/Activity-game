@@ -1,6 +1,6 @@
 const pool = require("../config/db")
 
-const CertificadoCategoria = (data) => {
+let CertificadoCategoria = (data) => {
   this.data = data;
   this.errors = []
 }

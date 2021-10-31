@@ -1,12 +1,10 @@
 const pool = require("../config/db")
 
-const UploadedCertification = (key_name, size, url, name) => {
+const UploadedCertification = function (key_name, size, url, name) {
   this.key_name = key_name;
   this.name = name;
   this.size = size;
   this.url = url;
-
-  console.log(UploadedCertification)
 }
 
 UploadedCertification.prototype.listAll = function () {

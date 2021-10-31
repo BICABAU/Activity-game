@@ -1,33 +1,33 @@
 const pool = require("../config/db")
 
-let Mission = ({ name, description, rewards, id_activity }) => {
+let Mission = function (name, description, rewards, id_activity) {
   this.name = name;
   this.description = description;
   this.rewards = rewards;
   this.id_activity = id_activity;
 }
 
-Mission.prototype.listAll = () => {
+Mission.prototype.listAll = function () {
 
 }
 
-Mission.prototype.listAllPerActivityType = () => {
+Mission.prototype.listAllPerActivityType = function () {
 
 }
 
-Mission.prototype.search = (id_mission) => {
+Mission.prototype.search = function (id_mission) {
 
 }
 
-Mission.prototype.create = () => {
+Mission.prototype.create = function () {
 
 }
 
-Mission.prototype.delete = (id_mission) => {
+Mission.prototype.delete = function (id_mission) {
 
 }
 
-Mission.prototype.missionValidate = (id_user, id_certification) => {
+Mission.prototype.missionValidate = function (id_user, id_certification) {
   /**
    * Assim que o usuario:
    * -> Faz o upload do arquivo

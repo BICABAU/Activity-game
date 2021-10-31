@@ -18,7 +18,7 @@ const FinishedMission = require('../models/FinishedMission');
 
 exports.uploadCertification = function (req, res) {
   const {
-    name: certification_name,
+    certification_name,
     description,
     activity_start,
     activity_end,
@@ -27,56 +27,59 @@ exports.uploadCertification = function (req, res) {
   } = req.body;
 
   const {
-    name: file_name,
+    file_name,
     key_name,
     size,
     url,
-  } = req.file;
+  } = req.body; // SO PRA TENSTAR VOU BOTAR BODY MAS É FILE
 
+  console.log('key-name ->' + req.body.certification_name)
   const user = new User()
   const mission = new Mission()
   const finishedMission = new FinishedMission()
 
-  const uploadedCertification = new UploadedCertification(file_name, key_name, size, url)
-  uploadedCertification.create()
-    .then(file_uploaded => {
-      console.log(file_uploaded)
+  const uploadedCertification = new UploadedCertification(key_name, size, url, file_name)
 
-      const searched_user = user.readByEmail(req.session.user.email)
-        .then(result => {
-          if (!searched_user) {
-            return new Error('User doesnt found')
-          }
+  return res.send(req.body)
+  // uploadedCertification.create()
+  //   .then(file_uploaded => {
+  //     console.log(file_uploaded)
 
-          console.log(result)
+  //     const searched_user = user.readByEmail(req.body.email) // PRA TESTAR VOU TIRAR O 'req.session.user.email'
+  //       .then(result => {
+  //         if (!searched_user) {
+  //           return new Error('User doesnt found')
+  //         }
 
-          return result
-        })
-        .catch(err => console.log(err))
+  //         console.log(result)
 
-      const certification = new Certification(certification_name, description, activity_start, activity_end, amount_hours, id_activity, file_uploaded.id,)
-      certification.create()
-        .then(certification_created => {
+  //         return result
+  //       })
+  //       .catch(err => console.log(err))
 
-          mission.missionValidate(searched_user.id, certification_created.id)
-            .then((mission_validated) => {
-              console.log(mission_validated)
+  //     const certification = new Certification(certification_name, description, activity_start, activity_end, amount_hours, id_activity, file_uploaded.id,)
+  //     certification.create()
+  //       .then(certification_created => {
 
-              finishedMission.create(mission_validated.id, searched_user.id)
-                .then((finished_mission_created) => {
-                  user.countAmountPoints(searched_user.points_total_amount, mission_validated.rewards, searched_user.id)
-                    .then(
-                      res.send("redireciona o usuario para a pagina principal")
-                    )
-                })
-                .catch(err => console.log(err))
-            })
-            .catch(err => console.log(err))
-        }
-        )
-        .catch(err => console.log(err))
-    })
-    .catch(err => console.log(err))
+  //         mission.missionValidate(searched_user.id, certification_created.id)
+  //           .then((mission_validated) => {
+  //             console.log(mission_validated)
+
+  //             finishedMission.create(mission_validated.id, searched_user.id)
+  //               .then((finished_mission_created) => {
+  //                 user.countAmountPoints(searched_user.points_total_amount, mission_validated.rewards, searched_user.id)
+  //                   .then(
+  //                     res.send("redireciona o usuario para a pagina principal")
+  //                   )
+  //               })
+  //               .catch(err => console.log(err))
+  //           })
+  //           .catch(err => console.log(err))
+  //       }
+  //       )
+  //       .catch(err => console.log(err))
+  //   })
+  //   .catch(err => console.log(err))
 
   // certification.create()
   //   .then(certification_created => {
