@@ -67,6 +67,7 @@ exports.alterarDados = function (req, res) {
                     nascimento: usuarioRecuperado.nascimento,
                     horas_acs: usuarioRecuperado.horas_acs,
                     horas_aes: usuarioRecuperado.horas_aes,
+                    id_user: usuarioRecuperado.id_user
                 }
                 res.redirect('/perfilDoAluno')
             })
