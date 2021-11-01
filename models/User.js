@@ -1,7 +1,7 @@
 const pool = require("../config/db")
 const bcrypt = require("bcryptjs")
 
-let User = function (
+let User = function ({
     matriculation,
     password_hash,
     first_name,
@@ -14,6 +14,7 @@ let User = function (
     extension_acitivity,
     points_total_amount,
     curso
+}
 ) {
     this.matriculation = matriculation,
         this.password_hash = password_hash,
@@ -49,11 +50,11 @@ User.prototype.create = function () {
 
 };
 
-User.prototype.login = function () {
+User.prototype.login = function (email) {
     return new Promise((resolve, reject) => {
-        this.readByEmail().then((usuarioRecuperado) => {
+        this.readByEmail(email).then((usuarioRecuperado) => {
             if (usuarioRecuperado && bcrypt.compareSync(this.password_hash, usuarioRecuperado.password_hash)) {
-                resolve('Login confere')
+                resolve(usuarioRecuperado)
             } else {
                 reject('Dados de login não conferem')
             }
@@ -63,7 +64,7 @@ User.prototype.login = function () {
 
 User.prototype.readByEmail = function (email) {
     const select = "SELECT * FROM users u WHERE u.email= $1";
-    const values = [email];
+    const values = [this.email || email];
 
     return new Promise((resolve, reject) => {
         pool.query(select, values, (error, results) => {

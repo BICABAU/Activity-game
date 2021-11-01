@@ -31,10 +31,10 @@ exports.uploadCertification = function (req, res) {
     key_name,
     size,
     url,
-  } = req.body; // SO PRA TENSTAR VOU BOTAR BODY MAS É FILE
+  } = req.file; // SO PRA TENSTAR VOU BOTAR BODY MAS É FILE
 
-  console.log('key-name ->' + req.body.certification_name)
-  const user = new User()
+  console.log('key-name ->' + req.file.certification_name)
+  const user = new User(req.session.user)
   const mission = new Mission()
   const finishedMission = new FinishedMission()
 

@@ -30,13 +30,17 @@ router.post('/alterarDados', mustBeLoggedIn, userController.alterarDados)
 // roteamento de estatisticas
 router.get('/estatisticas', mustBeLoggedIn, postController.pegarAtividades, userController.estatisticas)
 router.get('/estatisticas', mustBeLoggedIn, userController.estatisticas)
+
 // roteamento de ranking
 router.get('/ranking', mustBeLoggedIn, gamificationController.ranking)
+
 // roteamento de missões
 router.get('/missoes', mustBeLoggedIn, missoesController.missoes)
 router.get('/missoesSemanais', mustBeLoggedIn, missoesSemanaisController.missoesSemanais)
+
 // roteamento de patch_notes
 router.get('/atualizacoes', mustBeLoggedIn, userController.patchNotes)
+
 //roteamento de SESSÃO
 router.post('/login', sessaoController.login)
 router.get('/logout', sessaoController.logout)
@@ -47,7 +51,7 @@ router.get('/recuperarCursos', cursosController.recuperarCursos);
 //roteamento de post
 router.get('/postAcs', mustBeLoggedIn, postController.postACs)
 router.get('/postAes', mustBeLoggedIn, postController.postAEs)
-router.post('/uploadACs', mustBeLoggedIn, multer(multerConfig).single('certificados'), certificadosAcsController.uploadsAcs);
+router.post('/uploadACs', mustBeLoggedIn, multer(multerConfig).single('certificados'), certificationController.uploadCertification);
 router.post('/uploadAEs', mustBeLoggedIn, multer(multerConfig).single('certificados'), certificadosAesController.uploadAes);
 
 //roteamento de certificados
@@ -60,7 +64,7 @@ router.get('/apagarCertificadoAEs/:nome', mustBeLoggedIn, certificadosAesControl
 
 //roteamento JSON
 router.get('/cursos_json/:id_course_types', requisicoesJsonController.cursos_json)
-router.get('/subcategorias_json/:id_tipo_atividade_acs_fk', requisicoesJsonController.subcategorias_json)
+router.get('/subcategorias_json/:name_activity_type', requisicoesJsonController.subcategorias_json)
 
 /**
  * Validando as rotas

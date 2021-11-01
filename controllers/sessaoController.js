@@ -3,8 +3,8 @@ const User = require('../models/User')
 exports.login = function (req, res) {
   let user = new User(req.body);
   user
-    .login()
-    .then((result) => {
+    .login(req.body.email)
+    .then((usuarioRecuperado) => {
       req.session.user = {
         first_name: usuarioRecuperado.first_name,
         last_name: usuarioRecuperado.last_name,
@@ -17,7 +17,10 @@ exports.login = function (req, res) {
         extension_activity: usuarioRecuperado.extension_activity,
         matriculation: usuarioRecuperado.matriculation
       }
+
       req.session.save(() => {
+
+        console.log(req.session.user)
         res.redirect('/home')
       })
     })

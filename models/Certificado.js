@@ -23,11 +23,10 @@ Certificado.prototype.create = function () {
     });
 }
 
-Certificado.prototype.readCatAcsSubCategoria = function (acs) {
+Certificado.prototype.readCatAcsSubCategoria = function (string) {
 
-    const consulta = 'SELECT * from acs_subcategorias inner join acs' +
-        ' ON (acs_subcategorias.id_tipo_atividade_acs_fk = acs.id_tipo_atividade_acs)' +
-        `WHERE acs.id_tipo_atividade_acs = ${acs}`
+    const consulta = 'SELECT id_activity_types, name_subcategory FROM activity_types' +
+        ` WHERE is_complementary_activity = TRUE AND name = '${string}'`
     console.log(consulta)
     const values = []
     return new Promise((resolve, reject) => {
@@ -74,7 +73,10 @@ Certificado.prototype.readCatAes = function () {
 }
 
 Certificado.prototype.readCatAcs = function () {
-    const consulta = "SELECT * from acs"
+    const consulta = "SELECT name FROM activity_types AS atp" +
+        " WHERE is_complementary_activity = TRUE" +
+        " GROUP BY name";
+
     return new Promise((resolve, reject) => {
         pool.query(consulta, (error, results) => {
             if (error) {
