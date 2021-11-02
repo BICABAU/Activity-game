@@ -35,13 +35,13 @@ Certification.prototype.create = () => {
     ' VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)' +
     ' RETURNING *';
   const values = [this.name, this.description, this.activity_start, this.activity_end, this.amount_hours, this.amount_valid_hours, this.id_activity, this.id_uploaded, this.id_user];
-  console.log("certification create - log - " + values)
+  // console.log("certification create - log - " + values)
   return new Promise((resolve, reject) => {
     pool.query(insert, values, (error, results) => {
       if (error) {
         reject("Create Certification:" + error)
       } else {
-        resolve(results)
+        resolve(results.rows[0])
       }
     })
   })

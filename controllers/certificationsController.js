@@ -1,7 +1,7 @@
 /**
  * EU quero salvar um novo certificado e automaticamente fazer o usuario concluir a missão
  *
- * [0] - Salvar o caminho do arquivo com UPLOADED-CERTIFICATION
+ * [X] - Salvar o caminho do arquivo com UPLOADED-CERTIFICATION
  * [0] - Salvar dados do certificado em CERTIFICATION
  *  [0] - Buscar usuário
  *  [] - Validar atividade
@@ -30,7 +30,7 @@ exports.uploadCertification = function (req, res) {
     originalname: file_name,
     fieldname: key_name,
     size,
-  } = req.file; // SO PRA TENSTAR VOU BOTAR BODY MAS É FILE
+  } = req.file; // SO PRA TESTAR VOU BOTAR BODY MAS É FILE
 
   // Se o arquivo estiver sendo armazenado na AWS, retorna "location"
   // Se for no servidor local, retorna "path"
