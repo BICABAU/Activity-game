@@ -34,7 +34,8 @@ let User = function ({
 User.prototype.create = function () {
     let salt = bcrypt.genSaltSync(10)
     this.password_hash = bcrypt.hashSync(this.password_hash, salt)
-    const consulta = 'INSERT INTO users(first_name, last_name, email, cpf, phone, password_hash, birthdate, id_course, matriculation) values($1, $2, $3, $4, $5, $6, $7, $8,lower($9))'
+    const consulta = "INSERT INTO users(first_name, last_name, email, cpf, phone, password_hash, birthdate, id_course, matriculation)" +
+        " values($1, $2, $3, $4, $5, $6, $7, $8,lower($9))"
     const values = [this.first_name, this.last_name, this.email, this.cpf, this.phone, this.password_hash, this.birthdate, this.curso, this.matriculation]
     return new Promise((resolve, reject) => {
         pool.query(consulta, values, (error, results) => {
@@ -42,8 +43,7 @@ User.prototype.create = function () {
                 console.log(values)
                 reject("error: " + error)
             } else {
-                console.log(results)
-                resolve("Usuário inserido com sucesso!")
+                resolve(results.rows[0])
             }
         });
     });
@@ -71,7 +71,6 @@ User.prototype.readByEmail = function (email) {
             if (error) {
                 reject("E-mail não encontrado");
             } else {
-                console.log(results.rows[0])
                 resolve(results.rows[0]);
 
             }

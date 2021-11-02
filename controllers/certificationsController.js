@@ -4,39 +4,39 @@
  * [X] - Salvar o caminho do arquivo com UPLOADED-CERTIFICATION
  * [0] - Salvar dados do certificado em CERTIFICATION
  *  [0] - Buscar usuário
- *  [] - Validar atividade
+ *  [0] - Validar atividade
  * [0] - Buscar uma missão equivalente a atividade do certificado - MISSION
  * [0] - Salvar essa missão em FINISHED-MISSION
  * [0] - Contabilizar os pontos em USER
  */
 
-const User = require('../models/User');
 const UploadedCertification = require('../models/UploadedCertification');
+const Activity = require('../models/Activity');
+const User = require('../models/User');
 const Certification = require('../models/Certification');
 const Mission = require('../models/Mission');
 const FinishedMission = require('../models/FinishedMission');
 
 exports.uploadCertification = function (req, res) {
   const {
-    certification_name,
     description,
     activity_start,
     activity_end,
     amount_hours,
-    id_activity
+    subcategoria_atividade: id_activity_type
   } = req.body;
 
   const {
     originalname: file_name,
-    fieldname: key_name,
+    key: key_name,
     size,
-  } = req.file; // SO PRA TESTAR VOU BOTAR BODY MAS É FILE
+  } = req.file;
 
   // Se o arquivo estiver sendo armazenado na AWS, retorna "location"
   // Se for no servidor local, retorna "path"
   const url = (req.file.location) ? req.file.location : req.file.path
 
-  // console.log('key-name ->' + )
+  const activity = new Activity();
   const user = new User(req.session.user)
   const mission = new Mission()
   const finishedMission = new FinishedMission()
@@ -62,40 +62,37 @@ exports.uploadCertification = function (req, res) {
 
   uploadedCertification.create()
     .then(file_uploaded => {
-      console.log(file_uploaded)
+      activity.searchOne(id_activity_type)
+        .then(searchedActivity => {
+          user.readByEmail(req.session.user.email)
+            .then(searched_user => {
+              if (!searched_user) {
+                return new Error('User doesnt found')
+              }
 
-      const searched_user = user.readByEmail(req.session.user.email) // PRA TESTAR VOU TIRAR O 'req.session.user.email'
-        .then(result => {
-          if (!searched_user) {
-            return new Error('User doesnt found')
-          }
+              const certification = new Certification(file_uploaded.name, description, activity_start, activity_end, amount_hours, searchedActivity.id, file_uploaded.id, searched_user.id_user)
+              certification.create()
+                .then(certification_created => {
 
-          console.log(result)
+                  mission.missionValidate(searched_user.id_user, certification_created.id_certification)
+                    .then((mission_validated) => {
+                      console.log(mission_validated)
 
-          return result
-        })
-        .catch(err => console.log(err))
-
-      const certification = new Certification(certification_name, description, activity_start, activity_end, amount_hours, id_activity, file_uploaded.id, searched_user.id)
-      certification.create()
-        .then(certification_created => {
-
-          mission.missionValidate(searched_user.id, certification_created.id)
-            .then((mission_validated) => {
-              console.log(mission_validated)
-
-              finishedMission.create(mission_validated.id, searched_user.id)
-                .then((finished_mission_created) => {
-                  user.countAmountPoints(searched_user.points_total_amount, mission_validated.rewards, searched_user.id)
-                    .then(
-                      res.send("redireciona o usuario para a pagina principal")
-                    )
+                      finishedMission.create(mission_validated.id, searched_user.id_user)
+                        .then((finished_mission_created) => {
+                          user.countAmountPoints(searched_user.points_total_amount, mission_validated.rewards, searched_user.id_user)
+                            .then(
+                              res.send("redireciona o usuario para a pagina principal")
+                            )
+                        })
+                        .catch(err => console.log(err))
+                    })
+                    .catch(err => console.log(err))
                 })
                 .catch(err => console.log(err))
             })
             .catch(err => console.log(err))
-        }
-        )
+        })
         .catch(err => console.log(err))
     })
     .catch(err => console.log(err))

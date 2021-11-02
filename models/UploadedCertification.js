@@ -28,7 +28,7 @@ UploadedCertification.prototype.create = function () {
       if (error) {
         reject("create uploaded certification: " + error)
       } else {
-        resolve(results)
+        resolve(results.rows[0])
       }
     })
   })

@@ -1,20 +1,20 @@
 const pool = require("../config/db")
 
-let Activity = ({ quantity, hours_per_instance, id_type }) => {
+const Activity = function (quantity, hours_per_instance, id_type) {
   this.quantity = quantity
   this.hours_per_instance = hours_per_instance
   this.id_type = id_type
 }
 
-Activity.prototype.listAll = () => {
+Activity.prototype.listAll = function () {
+  return '';
+}
+
+Activity.prototype.listAllPerType = function () {
 
 }
 
-Activity.prototype.listAllPerType = () => {
-
-}
-
-Activity.prototype.listAllPerSubcategory = () => {
+Activity.prototype.listAllPerSubcategory = function () {
 
 }
 
@@ -27,7 +27,7 @@ Activity.prototype.searchOne = function (id_type) {
   return new Promise((resolve, reject) => {
     pool.query(select, values, (error, results) => {
       if (error) {
-        reject("E-mail não encontrado");
+        reject("Atividade não encontrada");
       } else {
         console.log(results.rows[0])
         resolve(results.rows[0]);
@@ -37,11 +37,11 @@ Activity.prototype.searchOne = function (id_type) {
   });
 };
 
-Activity.prototype.create = () => {
+Activity.prototype.create = function () {
 
 }
 
-Activity.prototype.delete = (id_activity) => {
+Activity.prototype.delete = function (id_activity) {
 
 }
 

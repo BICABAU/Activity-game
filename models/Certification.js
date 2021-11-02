@@ -21,15 +21,15 @@ let Certification = function (
   this.id_user = id_user;
 }
 
-Certification.prototype.listAll = () => {
+Certification.prototype.listAll = function () {
 
 }
 
-Certification.prototype.listPerUser = (id_user) => {
+Certification.prototype.listPerUser = function (id_user) {
 
 }
 
-Certification.prototype.create = () => {
+Certification.prototype.create = function () {
   const insert = 'INSERT INTO certifications' +
     ' (name, description, activity_start, activity_end, amount_hours, amount_valid_hours, id_activity, id_uploaded, id_user_fk)' +
     ' VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)' +
@@ -47,11 +47,11 @@ Certification.prototype.create = () => {
   })
 }
 
-Certification.prototype.delete = (id_certification) => {
+Certification.prototype.delete = function (id_certification) {
 
 }
 
-Certification.prototype.hoursValidation = (amount_hours) => {
+Certification.prototype.hoursValidation = function (amount_hours) {
 
 }
 
