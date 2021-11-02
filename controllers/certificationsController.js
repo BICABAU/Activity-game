@@ -30,8 +30,11 @@ exports.uploadCertification = function (req, res) {
     originalname: file_name,
     fieldname: key_name,
     size,
-    location: url,
   } = req.file; // SO PRA TENSTAR VOU BOTAR BODY MAS É FILE
+
+  // Se o arquivo estiver sendo armazenado na AWS, retorna "location"
+  // Se for no servidor local, retorna "path"
+  const url = (req.file.location) ? req.file.location : req.file.path
 
   // console.log('key-name ->' + )
   const user = new User(req.session.user)
@@ -40,21 +43,28 @@ exports.uploadCertification = function (req, res) {
 
   const uploadedCertification = new UploadedCertification(key_name, size, url, file_name)
 
-  return res.json({
-    body: {
-      certification_name,
-      description,
-      activity_start,
-      activity_end,
-      amount_hours,
-      id_activity
-    }, file: { file_name, key_name, size, url }
-  })
+  // return res.json({
+  //   body: {
+  //     certification_name,
+  //     description,
+  //     activity_start,
+  //     activity_end,
+  //     amount_hours,
+  //     id_activity
+  //   },
+  //   file: { file_name, key_name, size, url },
+  //   requisition: {
+  //     req_body: req.body,
+  //     req_file: req.file,
+  //     req_session: req.session
+  //   }
+  // })
+
   uploadedCertification.create()
     .then(file_uploaded => {
       console.log(file_uploaded)
 
-      const searched_user = user.readByEmail(req.body.email) // PRA TESTAR VOU TIRAR O 'req.session.user.email'
+      const searched_user = user.readByEmail(req.session.user.email) // PRA TESTAR VOU TIRAR O 'req.session.user.email'
         .then(result => {
           if (!searched_user) {
             return new Error('User doesnt found')
@@ -66,7 +76,7 @@ exports.uploadCertification = function (req, res) {
         })
         .catch(err => console.log(err))
 
-      const certification = new Certification(certification_name, description, activity_start, activity_end, amount_hours, id_activity, file_uploaded.id,)
+      const certification = new Certification(certification_name, description, activity_start, activity_end, amount_hours, id_activity, file_uploaded.id, searched_user.id)
       certification.create()
         .then(certification_created => {
 
