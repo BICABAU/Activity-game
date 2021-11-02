@@ -71,4 +71,7 @@ router.get('/subcategorias_json/:name_activity_type', requisicoesJsonController.
  */
 router.post('/certification', certificationController.uploadCertification);
 
+//exemplo de monitoramento de erro com SENTRY
+router.get('/debug-sentry', (req, res) => { throw new Error("Exemplo de erro") })
+
 module.exports = router
