@@ -5,9 +5,9 @@
         </div>
     </div>
     <nav class="navbar">
-        <button onclick="openNav()" class="sidenav-open">
-      <i class="bx bx-menu"></i>
-    </button>
+        <button onclick="openNav()" class="sidenav-open" id="openNav">
+            <i class="bx bx-menu"></i>
+        </button>
     </nav>
 </div>
 <div id="mySidenav" class="sidenav">
@@ -22,10 +22,17 @@
     </div>
     <ul>
         <li>
-            <a href="home">Página Inicial</a>
+            <a href="/home">Página Inicial</a>
         </li>
         <li>
-            <a href="atividadesComplementares">Atividades Complementares</a>
+            <a href="atividadesComplementares">
+                <% if(user.curso=='1' ){ %>
+                    Atividades Complementares
+                    <%} else { %>
+                        Atividades Teórico-Práticas de Aprofundamento
+                        <% } %>
+
+            </a>
         </li>
         <li>
             <a href="extensao">Atividades de Extensão</a>
@@ -39,21 +46,25 @@
         <li>
             <a href="missoes">Missões</a>
         </li>
-        <li>
-            <a href="missoesSemanais">Missões Semanais</a>
-        </li>
+
 
         <div class="linha"></div>
-        <div class="sidenav-horas">
+        <div id="hours">
+            <div class="sidenav-horas" id="complementary_activity">
+                <br><br>
+                <span>Horas registradas em ACs: </span>
+                <p>
+                    <%= user.horas_acs %> horas
+                </p>
+            </div>
             <br><br>
-            <span>Horas registradas em ACs: </span>
-            <p><%= user.horas_acs %> horas</p>
-        </div>
-        <br><br>
-        <div class="sidenav-horas">
-            <span>Horas registradas em AEs: </span>
-            <p><%= user.horas_aes %> horas</p>
-            <br><br>
+            <div class="sidenav-horas" id="extension_activity">
+                <span>Horas registradas em AEs: </span>
+                <p>
+                    <%= user.horas_aes %> horas
+                </p>
+                <br><br>
+            </div>
         </div>
         <div class="linha"></div>
         <div class="sidenav-text">
@@ -63,10 +74,31 @@
             <a href="perfildoAluno">Perfil do Aluno</a>
         </li>
         <li>
-            <a href="atualizacoes">Mudanças</a>
+            <a href="atualizacoes">Atualizações</a>
         </li>
         <li>
             <a href="/logout" class="btn-sair">Sair</a>
         </li>
     </ul>
 </div>
+
+<script>
+
+    const p_complementary_hours = document.getElementById('categoria_atividade')
+    const p_extension_hours = document.getElementById('subcategoria_atividade')
+    const openNav_hours = document.getElementById('openNav')
+    var value = '<%- (user.email) %>'
+
+
+
+    openNav_hours.addEventListener('click', (e) => {
+        fetch(`/horas_json/${value}`)
+            .then(response => {
+                response.json().then(data => {
+                    console.log("fetch subcategoria ->" + data)
+
+                });
+            })
+            .catch(err => console.log(err));
+    });
+</script>

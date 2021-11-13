@@ -1,35 +1,54 @@
-<%- contentFor('title') %>
-Missões
+<%- contentFor('title') %> Missões <%- contentFor('main') %>
+    <div class="mission-container">
+      <div class="header-space">
+        <div class="header-mission">
+          <h2 class="mission_title">Missões</h2>
+          <p class= "mission_subtitulo">Conclua missões para aumentar sua pontuação!</p>
+        </div>
+      </div>
+      <div class="mission_container">
+        <div class="mission-space">
+          <% if(user.curso==1) { %>
+            <p class= "mission_tipo">Atividades Complementares</p>
+            <% } else{ %>
+              <p class= "mission_tipo">Atividades Teórico-Práticas de Aprofundamento (ATPAs)</p>
+              <% } %>
+                <div class="mission-info-container">
+                  <% missoes.forEach(function(missoes){ %>
+                    <% if (user.curso==1) {%>
+                      <% if (missoes.is_complementary_activity==true ) {%>
+                        <div>
+                          <p class= "mission_conteudo">
+                            <%= missoes.name %>
+                          </p>
+                          <button class="btn-box"><i class="bx bx-star"></i></button>
+                        </div>
+                        <% }} else {%>
+                          <% if (missoes.is_atpas_activity==true ) {%>
+                            <div>
+                              <p class= "mission_conteudo">
+                                <%= missoes.name %>
+                              </p>
+                              <button class="btn-box"><i class="bx bx-star"></i></button>
+                            </div>
+                            <%}}%>
+                              <%}) %>
+                </div>
+        </div>
+        <div class="mission-space-2">
+          <p class= "mission_tipo">Atividades de Extensão</p>
+          <div class="mission-info-container">
+            <% missoes.forEach(function(missoes) {%>
+              <% if(missoes.is_extension_activity==true) {%>
 
-<%- contentFor('main') %>
-<div class="mission-container">
-   <div class="mission-space">
-      <div class="header-space"> 
-         <div class="header-mission">
-            <h2>Missões</h2>
-           </div>
+                <div>
+                  <p class= "mission_conteudo">
+                    <%= missoes.name %>
+                      <button class="btn-box"><i class="bx bx-star"></i></button>
+                  </p>
+                </div>
+                <%}})%>
+          </div>
+        </div>
       </div>
-      <div class="mission-info-container" >
-         <div>
-            <p>Se cadastre em um curso de Inglês</p>
-            <button class="btn-box"><i class='bx bx-star'></i></button>
-         </div>
-         <div>
-            <p>Se cadastre em um curso de Espanhol</p>
-            <button class="btn-box"><i class='bx bx-star'></i></button>
-         </div>
-      </div>
-      <div class="mission-info-container" >
-         <div>
-            <p>Só mostrando como funciona</p>
-            <button class="btn-box"><i class='bx bx-star'></i></button>
-         </div>
-         <div>
-            <p>Daora</p>
-            <button class="btn-box"><i class='bx bx-star'></i></button>
-         </div>
-      </div>
-   </div>
-
-   
-</div>
+    </div>

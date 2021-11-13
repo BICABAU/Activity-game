@@ -1,34 +1,45 @@
 <%- contentFor('title') %>
-Ranking
+    Ranking
 
-<%- contentFor('main') %>
-<body id="ranking">
+    <%- contentFor('main') %>
 
-    <div id="container-ranking">
-        <div class="ranking-text-container">
-            <h1>Ranking</h1>
-            <div class="curso-container">
-                <h2>Curso:</h2>
-                <h2 class="curso-text">TADS</h2>
+        <body id="ranking">
+
+            <div id="container-ranking">
+                <div class="ranking-text-container">
+                    <h1>Ranking</h1>
+                    <div class="curso-container">
+                        <h2>Curso:</h2>
+                        <% if (user.curso=='1' ) {%>
+                            <h2 class="curso-text">TADS</h2>
+                            <%} else if(user.curso=='2' ) {%>
+                                <h2 class="curso-text">Matemática</h2>
+                                <%} else if (user.curso=='3' ){%>
+                                    <h2 class="curso-text">Ciências Biologicas</h2>
+                                    <%}%>
+                    </div>
+                </div>
+                <div id="ranking-table-container">
+                    <div class="div-box">
+                        <table id="ranking-table">
+                            <tr>
+                                <th>Nome</th>
+                                <th style="border-right: none">Pontuação</th>
+                            </tr>
+                            <% ranking_recuperado.forEach(function(ranking_recuperado){ %>
+                                <tr>
+                                    <td>
+                                        <%= ranking_recuperado.first_name%>
+                                            <%=ranking_recuperado.last_name%>
+                                    </td>
+
+                                    <td style="border-right: none">
+                                        <%= ranking_recuperado.points_total_amount%>
+                                    </td>
+                                </tr>
+                                <% }) %>
+                        </table>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div id="ranking-table-container">
-            <div class="div-box">
-            <table id="ranking-table">
-                <tr>
-                    <th>#</th>
-                    <th>Nome</th>
-                    <th>Atv.Complementares</th>
-                    <th style="border-right: none">Atv. de Extensão</th>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Heitor Lima Barbosa Ribeiro</td>
-                    <td>90 Horas Restantes</td>
-                    <td style="border-right: none">50 Horas Restantes</td>
-                </tr>
-            </table>
-        </div>
-        </div>
-    </div>
-</body>
+        </body>

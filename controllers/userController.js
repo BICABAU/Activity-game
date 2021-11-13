@@ -1,5 +1,7 @@
 const User = require('../models/User')
 const CourseType = require('../models/CourseType')
+const ActivityType = require('../models/ActivityType')
+
 
 exports.cadastro = function (req, res) {
     let courseType = new CourseType()
@@ -22,20 +24,18 @@ exports.esqueciASenha = function (req, res) {
 }
 
 exports.home = function (req, res) {
-    if (req.session.user) {
-        res.render('pages/home')
-    } else {
-        res.render('/')
-    }
+    let activityType = new ActivityType()
+    activityType.listAllActivityAtpas().then((ActivityRecoveredAtpas) => {
+        activityType.listAllActivityComplementary().then((ActivityRecoveredComplementary) => {
+            if (req.session.user) {
+                res.render('pages/home', { AtpasRecovered: ActivityRecoveredAtpas, ComplementaryRecovered: ActivityRecoveredComplementary })
+            } else {
+                res.render('/')
+            }
+        })
+    })
 }
 
-exports.atividadesComplementares = function (req, res) {
-    res.render('pages/atividadesComplementares')
-}
-
-exports.extensao = function (req, res) {
-    res.render('pages/extensao')
-}
 
 exports.estatisticas = function (req, res) {
     res.render('pages/estatisticas')
@@ -54,21 +54,6 @@ exports.alterarDados = function (req, res) {
     user
         .alterarDados(), user.readByEmail()
             .then((result) => {
-                req.session.user = {
-                    nome: usuarioRecuperado.nome,
-                    sobrenome: usuarioRecuperado.sobrenome,
-                    curso: usuarioRecuperado.curso,
-                    email: user.data.email,
-                    cpf: usuarioRecuperado.cpf,
-                    telefone: usuarioRecuperado.telefone,
-                    instituicao: usuarioRecuperado.instituicao,
-                    cidade: usuarioRecuperado.cidade,
-                    senha: user.data.senha,
-                    nascimento: usuarioRecuperado.nascimento,
-                    horas_acs: usuarioRecuperado.horas_acs,
-                    horas_aes: usuarioRecuperado.horas_aes,
-                    id_user: usuarioRecuperado.id_user
-                }
                 res.redirect('/perfilDoAluno')
             })
             .catch((err) => {
@@ -87,6 +72,6 @@ exports.cadastrar = function (req, res) {
         });
 };
 
-exports.patchNotes = function (req,res) {
+exports.patchNotes = function (req, res) {
     res.render('pages/atualizacoes')
 }
