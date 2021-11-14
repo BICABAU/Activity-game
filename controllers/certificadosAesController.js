@@ -1,17 +1,5 @@
 const Certificado = require('../models/Certificado')
 
-exports.uploadAes = function (req, res) {
-    let certificados = new Certificado(req.file, req.body, req.session.user.email)
-    certificados
-        .create().then(certificados.contabilizarHorasAEs())
-        .then((result) => {
-            res.redirect('extensao')
-        })
-        .catch((err) => {
-            res.send('err')
-        })
-}
-
 exports.getAllAes = function (req, res) {
     let certificado = new Certificado(req.file, null, req.session.user.email)
     certificado
@@ -25,7 +13,8 @@ exports.getAllAes = function (req, res) {
 };
 
 exports.getByIdAe = function (req, res) {
-    const id = req.params.id_certificado;
+    const id = req.params.id_uploaded;
+    console.log(req.params.id_uploaded)
     let certificado = new Certificado(null, null, req.session.user.email);
     certificado
         .readOneById(id)
@@ -39,10 +28,12 @@ exports.getByIdAe = function (req, res) {
 };
 
 exports.apagarCertificadoAes = function (req, res) {
-    const nome = req.params.nome
+    const key_name = req.params.key_name
+    const id = req.params.id_uploaded
     let certificado = new Certificado(null, null, req.session.user.email)
     certificado
-        .removerHorasAEs(nome).then(certificado.apagarAws(nome)).then(certificado.apagar(nome))
+        .removerHorasAEs(id).then(certificado.apagarAws(key_name))
+        .then(certificado.delete_certifications(id)).then(certificado.delete_uploaded_certifications(key_name))
         .then((resultado) => {
             res.redirect('/home')
         })
