@@ -25,6 +25,7 @@
     "node": "^17.0.1",
     "nodemon": "^2.0.12",
     "pg": "^8.7.1",
+    "sentry": "^0.1.2",
     "uuid": "^8.3.2"
   },
   "repository": "git+https://github.com/cesagoncalves/IFPI-PROJETO-INTEGRADOR.git",

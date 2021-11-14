@@ -48,6 +48,9 @@ Certification.prototype.create = function () {
 }
 
 Certification.prototype.delete = function (id_certification) {
+}
+
+Certification.prototype.hoursValidation = function (amount_hours) {
 
 }
 

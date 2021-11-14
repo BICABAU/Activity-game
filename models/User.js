@@ -97,24 +97,38 @@ User.prototype.alterarDados = function () {
     });
 };
 
-User.prototype.getTotalHours = function () {
+User.prototype.getTotalHours = function (email) {
     /**
      * Fazer um select e retornar somente as
      * -> Horas Complementares
      * -> Horas de extensão
      */
-}
+    const select = "select complementary_activity, extension_activity from users where email = $1"
+    const values = [email];
+
+    return new Promise((resolve, reject) => {
+        pool.query(select, values, (error, results) => {
+            if (error) {
+                reject("E-mail não encontrado");
+            } else {
+                hours_recovered = results.rows[0]
+                console.log(hours_recovered)
+                resolve(hours_recovered)
+
+            }
+        });
+    });
+};
+
 
 User.prototype.countComplementaryHours = function () { }
 
 User.prototype.countExtensionHours = function () { }
 
 User.prototype.countAmountPoints = function (current_total_amount, rewards, id_user) {
-    const update = "UPDATE users SET points_total_amount = $1  WHERE id = $2";
+    const update = "UPDATE users SET points_total_amount = points_total_amount + $1  WHERE id_user = $2";
 
-    const new_total_amount = current_total_amount + rewards;
-
-    const values = [new_total_amount, id_user];
+    const values = [rewards, id_user];
 
     return new Promise((resolve, reject) => {
         pool.query(update, values, (err, results) => {

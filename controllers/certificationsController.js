@@ -23,7 +23,7 @@ exports.uploadCertification = function (req, res) {
     activity_start,
     activity_end,
     amount_hours,
-    subcategoria_atividade: id_activity_type
+    subcategoria_atividade: id_activity_type,
   } = req.body;
 
   const {
@@ -70,7 +70,7 @@ exports.uploadCertification = function (req, res) {
                 return new Error('User doesnt found')
               }
 
-              const certification = new Certification(file_uploaded.name, description, activity_start, activity_end, amount_hours, searchedActivity.id, file_uploaded.id, searched_user.id_user)
+              const certification = new Certification(file_uploaded.name, description, activity_start, activity_end, amount_hours, searchedActivity.id_type, file_uploaded.id, searched_user.id_user)
               certification.create()
                 .then(certification_created => {
 
@@ -78,11 +78,11 @@ exports.uploadCertification = function (req, res) {
                     .then((mission_validated) => {
                       console.log(mission_validated)
 
-                      finishedMission.create(mission_validated.id, searched_user.id_user)
+                      finishedMission.create(mission_validated.id_mission, searched_user.id_user)
                         .then((finished_mission_created) => {
-                          user.countAmountPoints(searched_user.points_total_amount, mission_validated.rewards, searched_user.id_user)
+                          user.countAmountPoints(searched_user.points_total_amount, mission_validated.rewards_points, searched_user.id_user)
                             .then(
-                              res.send("redireciona o usuario para a pagina principal")
+                              res.redirect('/home')
                             )
                         })
                         .catch(err => console.log(err))

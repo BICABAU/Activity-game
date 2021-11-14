@@ -25,11 +25,10 @@ router.get('/cadastro', userController.cadastro)
 router.get('/esqueciASenha', userController.esqueciASenha)
 router.get('/perfilDoAluno', mustBeLoggedIn, userController.perfilDoAluno)
 router.post('/cadastrar', userController.cadastrar)
-
 router.post('/alterarDados', mustBeLoggedIn, userController.alterarDados)
+
 // roteamento de estatisticas
 router.get('/estatisticas', mustBeLoggedIn, postController.pegarAtividades, userController.estatisticas)
-router.get('/estatisticas', mustBeLoggedIn, userController.estatisticas)
 
 // roteamento de ranking
 router.get('/ranking', mustBeLoggedIn, gamificationController.ranking)
@@ -52,19 +51,20 @@ router.get('/recuperarCursos', cursosController.recuperarCursos);
 router.get('/postAcs', mustBeLoggedIn, postController.postACs)
 router.get('/postAes', mustBeLoggedIn, postController.postAEs)
 router.post('/uploadACs', mustBeLoggedIn, multer(multerConfig).single('certificados'), certificationController.uploadCertification);
-router.post('/uploadAEs', mustBeLoggedIn, multer(multerConfig).single('certificados'), certificadosAesController.uploadAes);
+router.post('/uploadAEs', mustBeLoggedIn, multer(multerConfig).single('certificados'), certificationController.uploadCertification);
 
 //roteamento de certificados
-router.get('/atividadesComplementares', mustBeLoggedIn, certificadosAcsController.getAllAcs, userController.atividadesComplementares)
-router.get('/extensao', mustBeLoggedIn, certificadosAesController.getAllAes, userController.extensao)
-router.get('/mostrar_ac/:id_certificado', mustBeLoggedIn, certificadosAcsController.getByIdAc)
-router.get('/mostrar_ae/:id_certificado', mustBeLoggedIn, certificadosAesController.getByIdAe)
-router.get('/apagarCertificadoACs/:nome', mustBeLoggedIn, certificadosAcsController.apagarCertificadoAcs)
-router.get('/apagarCertificadoAEs/:nome', mustBeLoggedIn, certificadosAesController.apagarCertificadoAes)
+router.get('/atividadesComplementares', mustBeLoggedIn, certificadosAcsController.getAllAcs)
+router.get('/extensao', mustBeLoggedIn, certificadosAesController.getAllAes)
+router.get('/mostrar_ac/:id_uploaded', mustBeLoggedIn, certificadosAcsController.getByIdAc)
+router.get('/mostrar_ae/:id_uploaded', mustBeLoggedIn, certificadosAesController.getByIdAe)
+router.get('/apagarCertificadoACs/:id_uploaded/:key_name', mustBeLoggedIn, certificadosAcsController.apagarCertificadoAcs)
+router.get('/apagarCertificadoAEs/:key_name', mustBeLoggedIn, certificadosAesController.apagarCertificadoAes)
 
 //roteamento JSON
 router.get('/cursos_json/:id_course_types', requisicoesJsonController.cursos_json)
 router.get('/subcategorias_json/:name_activity_type', requisicoesJsonController.subcategorias_json)
+router.get('/horas_json/:email', requisicoesJsonController.horas_json)
 
 /**
  * Validando as rotas
