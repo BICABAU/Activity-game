@@ -50,12 +50,73 @@ Certification.prototype.create = function () {
 Certification.prototype.delete = function (id_certification) {
 }
 
-Certification.prototype.hoursValidation = function (amount_hours) {
+/**
+ * INCOMPLETO - falta considerar as 'horas maximas' por atividade especifica
+ * e/ou a 'quantidade de vezes' que ela pode ser usada
+ */
+Certification.prototype.hoursValidation = function (
+  amount_hours,
+  searchedActivity,
+  searchedUser,
+  searchedCourse
+) {
+  const {
+    hours_per_instance,
+    hours_max,
+    is_extension_activity,
+  } = searchedActivity;
 
-}
+  const { email } = searchedUser;
 
-Certification.prototype.hoursValidation = function (amount_hours) {
+  if (amount_hours < hours_per_instance) {
+    throw new Error('A quantidade de horas da atividade não é o suficiente');
+  }
 
+  var values;
+  const type_activity = is_extension_activity ? 'extension_activity' : 'complementary_activity'
+
+  const update = 'UPDATE users' +
+    ' SET $1 = $2' +
+    ' WHERE email = $3' +
+    ' RETURNING *';
+
+  switch (type_activity) {
+    case 'complementary_activity':
+      if (parseFloat(searchedCourse.max_complementary_activity) > parseFloat(searchedUser.complementary_activity)) {
+        var variation = searchedCourse.max_complementary_activity - searchedUser.complementary_activity;
+
+        if (variation < hours_per_instance) {
+          values = [type_activity, parseFloat(searchedUser.complementary_activity) + parseFloat(variation), searchedUser.email]
+        } else {
+          values = [type_activity, parseFloat(searchedUser.complementary_activity) + parseFloat(hours_per_instance), searchedUser.email]
+        }
+      }
+
+      break;
+
+    case 'extension_activity':
+      if (parseFloat(searchedCourse.max_extension_activity) > parseFloat(searchedUser.extension_activity)) {
+        var variation = searchedCourse.max_extension_activity - searchedUser.extension_activity;
+
+        if (variation < hours_per_instance) {
+          values = [type_activity, parseFloat(searchedUser.extension_activity) + parseFloat(variation), searchedUser.email]
+        } else {
+          values = [type_activity, parseFloat(searchedUser.extension_activity) + parseFloat(hours_per_instance), searchedUser.email]
+        }
+      }
+
+      break;
+  }
+
+  return new Promise((resolve, reject) => {
+    pool.query(update, values, (error, results) => {
+      if (error) {
+        reject(`Erro ao adicionar horas do usuario -> ${error} and code ${error.code}`)
+      } else {
+        resolve(results, type_activity)
+      }
+    })
+  })
 }
 
 module.exports = Certification;

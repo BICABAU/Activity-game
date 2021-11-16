@@ -28,7 +28,7 @@ Course.prototype.recuperarCursos = function (id_courses) {
 // Não implementado
 Course.prototype.create = function () { }
 
-Course.prototype.searchOne = function (email) {
+Course.prototype.searchCourseByUser = function (email) {
   const select = 'SELECT * FROM courses JOIN users' +
     ' ON (courses.id_courses = users.id_course)' +
     ` WHERE users.email = $1`

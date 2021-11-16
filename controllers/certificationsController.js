@@ -14,6 +14,7 @@ const UploadedCertification = require('../models/UploadedCertification');
 const Activity = require('../models/Activity');
 const User = require('../models/User');
 const Certification = require('../models/Certification');
+const Course = require('../models/Course');
 const Mission = require('../models/Mission');
 const FinishedMission = require('../models/FinishedMission');
 
@@ -38,27 +39,11 @@ exports.uploadCertification = function (req, res) {
 
   const activity = new Activity();
   const user = new User(req.session.user)
+  const course = new Course()
   const mission = new Mission()
   const finishedMission = new FinishedMission()
 
   const uploadedCertification = new UploadedCertification(key_name, size, url, file_name)
-
-  // return res.json({
-  //   body: {
-  //     certification_name,
-  //     description,
-  //     activity_start,
-  //     activity_end,
-  //     amount_hours,
-  //     id_activity
-  //   },
-  //   file: { file_name, key_name, size, url },
-  //   requisition: {
-  //     req_body: req.body,
-  //     req_file: req.file,
-  //     req_session: req.session
-  //   }
-  // })
 
   uploadedCertification.create()
     .then(file_uploaded => {
@@ -73,6 +58,17 @@ exports.uploadCertification = function (req, res) {
               const certification = new Certification(file_uploaded.name, description, activity_start, activity_end, amount_hours, searchedActivity.id_type, file_uploaded.id, searched_user.id_user)
               certification.create()
                 .then(certification_created => {
+
+                  course.searchCourseByUser(searched_user.email)
+                    .then(searchedCourse => {
+                      certification.hoursValidation(certification_created.amount_hours, searchedActivity, searched_user, searchedCourse)
+                        .then(certificationValidated => {
+                          console.log(certificationValidated)
+                        })
+                        .catch(err => console.log(err))
+                    })
+                    .catch(err => console.log(err))
+
 
                   mission.missionValidate(searched_user.id_user, certification_created.id_certification)
                     .then((mission_validated) => {

@@ -54,14 +54,14 @@
                 <br><br>
                 <span>Horas registradas em ACs: </span>
                 <p>
-                    <%= user.horas_acs %> horas
+                    <span id="acs_view"><%= user.horas_acs %></span> horas
                 </p>
             </div>
             <br><br>
             <div class="sidenav-horas" id="extension_activity">
                 <span>Horas registradas em AEs: </span>
                 <p>
-                    <%= user.horas_aes %> horas
+                    <span id="aes_view"><%= user.horas_aes %></span> horas
                 </p>
                 <br><br>
             </div>
@@ -87,16 +87,18 @@
     const p_complementary_hours = document.getElementById('categoria_atividade')
     const p_extension_hours = document.getElementById('subcategoria_atividade')
     const openNav_hours = document.getElementById('openNav')
+    const view_acs = document.getElementById('acs_view')
+    const view_aes = document.getElementById('aes_view')
+
     var value = '<%- (user.email) %>'
-
-
 
     openNav_hours.addEventListener('click', (e) => {
         fetch(`/horas_json/${value}`)
             .then(response => {
-                response.json().then(data => {
-                    console.log("fetch subcategoria ->" + data)
-
+                response.json().then(({ hours_recovered }) => {
+                    // console.log("fetch subcategoria -> " + hours_recovered.extension_activity)
+                    view_acs.innerHTML = hours_recovered.complementary_activity;
+                    view_aes.innerHTML = hours_recovered.extension_activity;
                 });
             })
             .catch(err => console.log(err));

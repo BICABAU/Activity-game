@@ -103,7 +103,7 @@ User.prototype.getTotalHours = function (email) {
      * -> Horas Complementares
      * -> Horas de extensão
      */
-    const select = "select complementary_activity, extension_activity from users where email = $1"
+    const select = "SELECT complementary_activity, extension_activity FROM users WHERE email = $1"
     const values = [email];
 
     return new Promise((resolve, reject) => {
@@ -111,9 +111,10 @@ User.prototype.getTotalHours = function (email) {
             if (error) {
                 reject("E-mail não encontrado");
             } else {
-                hours_recovered = results.rows[0]
-                console.log(hours_recovered)
-                resolve(hours_recovered)
+                // hours_recovered = results.rows[0]
+                // console.log(hours_recovered)
+                // console.log(results.rows[0])
+                resolve(results.rows[0])
 
             }
         });

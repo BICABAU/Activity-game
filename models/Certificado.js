@@ -25,13 +25,8 @@ Certificado.prototype.create = function () {
 
 Certificado.prototype.readCatAcsSubCategoria = function (string) {
 
-<<<<<<< HEAD
-    const consulta = 'SELECT id_activity_types, name_subcategory FROM activity_types' +
-        ` WHERE is_complementary_activity = TRUE AND name = '${string}'`
-=======
     const consulta = 'SELECT id_activity_types, name_subcategory, id_type FROM activity_types join activities ON (id_type = id_activity_types)' +
         ` WHERE is_complementary_activity = TRUE AND name = '${string}' OR is_atpas_activity = TRUE AND name = '${string}'`
->>>>>>> miracle
     console.log(consulta)
     const values = []
     return new Promise((resolve, reject) => {
@@ -78,15 +73,9 @@ Certificado.prototype.readCatAes = function () {
 }
 
 Certificado.prototype.readCatAcs = function () {
-<<<<<<< HEAD
-    const consulta = "SELECT name FROM activity_types AS atp" +
-        " WHERE is_complementary_activity = TRUE" +
-        " GROUP BY name";
-=======
     const consulta = "SELECT name, is_complementary_activity, is_atpas_activity FROM activity_types AS atp" +
         " WHERE is_complementary_activity = TRUE OR is_atpas_activity = TRUE" +
         " GROUP BY name,is_complementary_activity, is_atpas_activity";
->>>>>>> miracle
 
     return new Promise((resolve, reject) => {
         pool.query(consulta, (error, results) => {
@@ -94,7 +83,7 @@ Certificado.prototype.readCatAcs = function () {
                 reject("Não foi possivel ler as categorias" + error)
             } else {
                 resultado_categoria = results.rows
-                console.log(resultado_categoria)
+                // console.log(resultado_categoria)
                 resolve(resultado_categoria)
             }
         })

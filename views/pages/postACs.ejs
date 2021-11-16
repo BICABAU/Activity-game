@@ -24,31 +24,19 @@
                 <div class="text_descricao">
                     <label for="">Insira a Descrição da Atividade:</label>
                     <br>
-<<<<<<< HEAD
-                    <textarea name="description" id="description" placeholder=""cols="50" rows="4"></textarea>
-=======
                     <textarea name="description" id="description" placeholder="" cols="50" rows="4"></textarea>
->>>>>>> miracle
                 </div>
                 <div class="input_periodo">
                     <br>
                     <label for="">Inicio da realização da atividade:</label>
-<<<<<<< HEAD
-                    <input type="date" name="activity_start" id="activity_start" placeholder="Ex: 23/09/2021 a 25/09/2021" />
-=======
                     <input type="date" name="activity_start" id="activity_start"
                         placeholder="Ex: 23/09/2021 a 25/09/2021" />
->>>>>>> miracle
                 </div>
                 <div class="input_periodo">
                     <br>
                     <label for="">Final da realização da atividade:</label>
-<<<<<<< HEAD
-                    <input type="date" name="activity_end" id="activity_end" placeholder="Ex: 23/09/2021 a 25/09/2021" />
-=======
                     <input type="date" name="activity_end" id="activity_end"
                         placeholder="Ex: 23/09/2021 a 25/09/2021" />
->>>>>>> miracle
                 </div>
                 <div class="esconder_tipo">
                     <label for="tipo_atividade">Atividade</label>
@@ -61,13 +49,6 @@
                     <label for="">Grupo da atividade:</label>
                     <select name="categoria_atividade" id="categoria_atividade">
                         <option value="" selected disabled hidden>----- Selecione a categoria -----</option>
-<<<<<<< HEAD
-                        <% categorias_recuperadas_acs.forEach(categoria_recuperada_acs => { %>
-                            <option value="<%= categoria_recuperada_acs.name%>" id="<%= categoria_recuperada_acs.name%>">
-                                <%= categoria_recuperada_acs.name%>
-                            </option>
-                            <% }) %>
-=======
                         <% if (user.curso==1) {%>
                             <% categorias_recuperadas_acs.forEach(categoria_recuperada_acs=> { %>
                                 <% if (categoria_recuperada_acs.is_complementary_activity==true) {%>
@@ -87,7 +68,6 @@
                                                         <% } %>
                                                             <% }) %>
                                                                 <%}%>
->>>>>>> miracle
                     </select>
                 </div>
                 <div>
@@ -217,21 +197,6 @@
             }
 
             fetch(`/subcategorias_json/${value}`)
-<<<<<<< HEAD
-            .then(response =>{
-                response.json().then(data =>{
-                    console.log("fetch subcategoria ->" + data)
-                    data.subcategorias_recuperadas.forEach(item =>{
-                        console.log("data subcategoria ->" + item)
-                        let option = document.createElement('option');
-
-                        option.innerHTML= item.name_subcategory
-                        option.value = item.id_activity_types
-                        option.id = item.id_activity_types
-
-                           
-                        select_subCategoriaAtividade.appendChild(option)    
-=======
                 .then(response => {
                     response.json().then(data => {
                         console.log("fetch subcategoria ->" + data)
@@ -246,7 +211,6 @@
 
                             select_subCategoriaAtividade.appendChild(option)
                         })
->>>>>>> miracle
                     })
                 })
                 .catch(err => console.log(err));
