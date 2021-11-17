@@ -83,7 +83,7 @@ Certificado.prototype.readCatAcs = function () {
                 reject("Não foi possivel ler as categorias" + error)
             } else {
                 resultado_categoria = results.rows
-                console.log(resultado_categoria)
+                // console.log(resultado_categoria)
                 resolve(resultado_categoria)
             }
         })

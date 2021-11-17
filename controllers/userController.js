@@ -36,7 +36,6 @@ exports.home = function (req, res) {
     })
 }
 
-
 exports.estatisticas = function (req, res) {
     res.render('pages/estatisticas')
 }

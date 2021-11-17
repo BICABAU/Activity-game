@@ -1,7 +1,5 @@
 const Certificado = require('../models/Certificado')
 
-
-
 exports.getAllAes = function (req, res) {
     let certificado = new Certificado(req.file, null, req.session.user.email)
     certificado

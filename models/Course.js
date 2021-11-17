@@ -28,4 +28,24 @@ Course.prototype.recuperarCursos = function (id_courses) {
 // Não implementado
 Course.prototype.create = function () { }
 
+Course.prototype.searchCourseByUser = function (email) {
+  const select = 'SELECT * FROM courses JOIN users' +
+    ' ON (courses.id_courses = users.id_course)' +
+    ` WHERE users.email = $1`
+
+  const values = [email];
+
+  return new Promise((resolve, reject) => {
+    pool.query(select, values, (error, results) => {
+      if (error) {
+        reject("Nenhum curso encontrado com este e-mail!")
+      } else {
+        console.log(results.rows[0])
+        // resolve("Usuário inserido com sucesso!")
+        resolve(results.rows[0])
+      }
+    });
+  });
+}
+
 module.exports = Course;

@@ -25,8 +25,8 @@ router.get('/cadastro', userController.cadastro)
 router.get('/esqueciASenha', userController.esqueciASenha)
 router.get('/perfilDoAluno', mustBeLoggedIn, userController.perfilDoAluno)
 router.post('/cadastrar', userController.cadastrar)
-
 router.post('/alterarDados', mustBeLoggedIn, userController.alterarDados)
+
 // roteamento de estatisticas
 router.get('/estatisticas', mustBeLoggedIn, postController.pegarAtividades, userController.estatisticas)
 

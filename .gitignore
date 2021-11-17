@@ -5,6 +5,7 @@ npm-debug.log
 .DS_Store
 tmp/uploads/*
 yarn.lock
+package-lock.json
 
 tmp/uploads/*
 
@@ -20,7 +21,6 @@ pnpm-debug.log*
 
 # Editor directories and files
 .idea
-.vscode
 *.suo
 .ntvs
 *.njsproj
