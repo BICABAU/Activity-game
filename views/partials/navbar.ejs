@@ -96,7 +96,6 @@
         fetch(`/horas_json/${value}`)
             .then(response => {
                 response.json().then(({ hours_recovered }) => {
-                    // console.log("fetch subcategoria -> " + hours_recovered.extension_activity)
                     view_acs.innerHTML = hours_recovered.complementary_activity;
                     view_aes.innerHTML = hours_recovered.extension_activity;
                 });
