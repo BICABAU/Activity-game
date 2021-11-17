@@ -24,7 +24,9 @@ exports.uploadCertification = function (req, res) {
     activity_start,
     activity_end,
     amount_hours,
-    subcategoria_atividade: id_activity_type,
+    subcategoria_atividade,
+    // subcategoria_atividade: id_activity_type,
+    categoria_atividade
   } = req.body;
 
   const {
@@ -32,6 +34,12 @@ exports.uploadCertification = function (req, res) {
     key: key_name,
     size,
   } = req.file;
+
+  // Se subcategoria_atividade tiver um valor diferente de nulo, significa que é
+  // uma atividade complementar, logo, eu pegarei o id da subcategoria
+  // Se subcategoria_atividade for nulo, é pq é atividade de extensão, logo, pegarei
+  // o id da categoria_atividade
+  const id_activity_type = subcategoria_atividade ? subcategoria_atividade : categoria_atividade
 
   // Se o arquivo estiver sendo armazenado na AWS, retorna "location"
   // Se for no servidor local, retorna "path"
@@ -62,8 +70,8 @@ exports.uploadCertification = function (req, res) {
                   course.searchCourseByUser(searched_user.email)
                     .then(searchedCourse => {
                       certification.hoursValidation(certification_created.amount_hours, searchedActivity, searched_user, searchedCourse)
-                        .then(certificationValidated => {
-                          console.log(certificationValidated)
+                        .then((certificationValidated, typeActivity) => {
+                          console.log(certificationValidated, typeActivity)
                         })
                         .catch(err => console.log(err))
                     })

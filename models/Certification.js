@@ -73,12 +73,23 @@ Certification.prototype.hoursValidation = function (
   }
 
   var values;
-  const type_activity = is_extension_activity ? 'extension_activity' : 'complementary_activity'
+  const update_options = {
+    update_complementary: {
+      query: 'UPDATE users' +
+        " SET complementary_activity = $1" +
+        ' WHERE email = $2' +
+        ' RETURNING *'
+    },
+    update_extension: {
+      query: 'UPDATE users' +
+        " SET extension_activity = $1" +
+        ' WHERE email = $2' +
+        ' RETURNING *'
+    }
+  }
 
-  const update = 'UPDATE users' +
-    ' SET $1 = $2' +
-    ' WHERE email = $3' +
-    ' RETURNING *';
+  const type_activity = is_extension_activity ? 'extension_activity' : 'complementary_activity';
+  const update = type_activity === 'extension_activity' ? update_options.update_extension.query : update_options.update_complementary.query
 
   switch (type_activity) {
     case 'complementary_activity':
@@ -86,9 +97,9 @@ Certification.prototype.hoursValidation = function (
         var variation = searchedCourse.max_complementary_activity - searchedUser.complementary_activity;
 
         if (variation < hours_per_instance) {
-          values = [type_activity, parseFloat(searchedUser.complementary_activity) + parseFloat(variation), searchedUser.email]
+          values = [parseFloat(searchedUser.complementary_activity) + parseFloat(variation), searchedUser.email]
         } else {
-          values = [type_activity, parseFloat(searchedUser.complementary_activity) + parseFloat(hours_per_instance), searchedUser.email]
+          values = [parseFloat(searchedUser.complementary_activity) + parseFloat(hours_per_instance), searchedUser.email]
         }
       }
 
@@ -98,10 +109,10 @@ Certification.prototype.hoursValidation = function (
       if (parseFloat(searchedCourse.max_extension_activity) > parseFloat(searchedUser.extension_activity)) {
         var variation = searchedCourse.max_extension_activity - searchedUser.extension_activity;
 
-        if (variation < hours_per_instance) {
-          values = [type_activity, parseFloat(searchedUser.extension_activity) + parseFloat(variation), searchedUser.email]
+        if (variation < amount_hours) {
+          values = [parseFloat(searchedUser.extension_activity) + parseFloat(variation), searchedUser.email]
         } else {
-          values = [type_activity, parseFloat(searchedUser.extension_activity) + parseFloat(hours_per_instance), searchedUser.email]
+          values = [parseFloat(searchedUser.extension_activity) + parseFloat(amount_hours), searchedUser.email]
         }
       }
 
