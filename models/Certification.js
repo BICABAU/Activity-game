@@ -72,7 +72,7 @@ Certification.prototype.hoursValidation = function (
     throw new Error('A quantidade de horas da atividade não é o suficiente');
   }
 
-  var values;
+  var values, amount_valid_hours;
   const update_options = {
     update_complementary: {
       query: 'UPDATE users' +
@@ -98,8 +98,10 @@ Certification.prototype.hoursValidation = function (
 
         if (variation < hours_per_instance) {
           values = [parseFloat(searchedUser.complementary_activity) + parseFloat(variation), searchedUser.email]
+          amount_valid_hours = variation;
         } else {
           values = [parseFloat(searchedUser.complementary_activity) + parseFloat(hours_per_instance), searchedUser.email]
+          amount_valid_hours = hours_per_instance;
         }
       }
 
@@ -111,8 +113,10 @@ Certification.prototype.hoursValidation = function (
 
         if (variation < amount_hours) {
           values = [parseFloat(searchedUser.extension_activity) + parseFloat(variation), searchedUser.email]
+          amount_valid_hours = variation;
         } else {
           values = [parseFloat(searchedUser.extension_activity) + parseFloat(amount_hours), searchedUser.email]
+          amount_valid_hours = amount_hours;
         }
       }
 
@@ -124,10 +128,35 @@ Certification.prototype.hoursValidation = function (
       if (error) {
         reject(`Erro ao adicionar horas do usuario -> ${error} and code ${error.code}`)
       } else {
-        resolve(results, type_activity)
+        const datas = {
+          results: results,
+          type_activity: type_activity,
+          amount_valid_hours: amount_valid_hours
+        }
+
+        resolve(datas)
       }
     })
   })
+}
+
+Certification.prototype.setAmountValidHours = function (certification_id, amount_valid_hours) {
+  const update = 'UPDATE certifications' +
+    ' SET amount_valid_hours = $1' +
+    ' WHERE id_certification = $2'
+
+  const values = [amount_valid_hours, certification_id]
+
+  return new Promise((resolve, reject) => {
+    pool.query(update, values, (error, results) => {
+      if (error) {
+        reject(`Erro ao inserir dentro do certificado, a quantidade de horas válidas -> ${error} and code ${error.code}`)
+      } else {
+        resolve(results)
+      }
+    })
+  })
+
 }
 
 module.exports = Certification;

@@ -70,8 +70,14 @@ exports.uploadCertification = function (req, res) {
                   course.searchCourseByUser(searched_user.email)
                     .then(searchedCourse => {
                       certification.hoursValidation(certification_created.amount_hours, searchedActivity, searched_user, searchedCourse)
-                        .then((certificationValidated, typeActivity) => {
-                          console.log(certificationValidated, typeActivity)
+                        .then(({ results, typeActivity, amount_valid_hours }) => {
+                          console.log(amount_valid_hours)
+
+                          certification.setAmountValidHours(certification_created.id_certification, amount_valid_hours)
+                            .then(results => {
+                              console.log('Horas válidas inseridas com sucesso')
+                            })
+                            .catch(err => console.log(err))
                         })
                         .catch(err => console.log(err))
                     })
