@@ -1,72 +1,45 @@
 <%- contentFor('title') %>
-    Perfil do Aluno
+    Ranking
+
     <%- contentFor('main') %>
-        <section class="atividades">
-            <div class="atividades-de-extensao fonte caixa">
-                <div class="container-perfilDoAluno">
-                    <form action="/alterarDados" method="POST">
-                        <div class="lista-atividades text-box">
 
-                            <div class="atividades-titulos">
-                                <h2>Perfil do Aluno</h2>
+        <body id="ranking">
 
-                            </div>
+            <div id="container-ranking">
+                <div class="ranking-text-container">
+                    <h1>Ranking</h1>
+                    <div class="curso-container">
+                        <h2>Curso:</h2>
+                        <% if (user.curso=='1' ) {%>
+                            <h2 class="curso-text">TADS</h2>
+                            <%} else if(user.curso=='2' ) {%>
+                                <h2 class="curso-text">Matemática</h2>
+                                <%} else if (user.curso=='3' ){%>
+                                    <h2 class="curso-text">Ciências Biologicas</h2>
+                                    <%}%>
+                    </div>
+                </div>
+                <div id="ranking-table-container">
+                    <div class="div-box">
+                        <table id="ranking-table">
+                            <tr>
+                                <th>Nome</th>
+                                <th style="border-right: none">Pontuação</th>
+                            </tr>
+                            <% ranking_recuperado.forEach(function(ranking_recuperado){ %>
+                                <tr>
+                                    <td>
+                                        <%= ranking_recuperado.first_name%>
+                                            <%=ranking_recuperado.last_name%>
+                                    </td>
 
-                            <div>
-                                <label for="">Nome</label>
-                                <input type="text" name="nome" id="nome" value="<%= ranking_recuperado.first_name %>">
-                            </div>
-                            <div>
-                                <label for="">Sobrenome</label>
-                                <input type="text" name="sobrenome" id="sobrenome" value="<%= ranking_recuperado.last_name %>">
-                            </div>
-                            <div>
-                                <label for="">E-mail </label>
-                                <input type="text" name="email" id="email" value="<%= user_info.email %>">
-                            </div>
-                            <div>
-                                <label for="">CPF </label>
-                                <input type="text" name="cpf" id="cpf" value="<%= user_info.cpf %>">
-                            </div>
-
-                            <div>
-                                <label for="">Telefone </label>
-                                <input type="text" name="telefone" id="telefone" value=" <%= user_info.phone %>">
-                            </div>
-                            <br>
-                            <div>
-                                <label for="">Senha </label>
-                                <input type="password" name="senha" id="senha" value="<%= user_info.password_hash %>">
-                            </div>
-                            <br> <br>
-                            <div class="btn-save">
-                                <button type="submit">SALVAR ALTERAÇÕES</button>
-                            </div>
-                    </form>
+                                    <td style="border-right: none">
+                                        <%= ranking_recuperado.points_total_amount%>
+                                    </td>
+                                </tr>
+                                <% }) %>
+                        </table>
+                    </div>
                 </div>
             </div>
-
-            </div>
-            </div>
-            <div id="modal-upload" class="modal-container">
-                <div class="modal">
-                    <button class="fechar">X</button>
-                    <h3>
-                        Insira os dados abaixo para realizar o upload dos certificados
-                    </h3>
-                    <form action="" class="form-modal">
-                        <label for="">Insira o arquivo abaixo:</label>
-                        <input type="file" name="" id="" />
-                        <label for="">Insira a quantidade de horas que você deseja
-                            contabilizar:</label>
-                        <input type="number" name="" id="" />
-                        <button type="submit">Clique aqui para realizar o upload</button>
-                    </form>
-                </div>
-            </div>
-        </section>
-        </main>
-        <script src="javascript.js"></script>
         </body>
-
-        </html>
