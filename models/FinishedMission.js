@@ -21,11 +21,11 @@ FinishedMission.prototype.listAllPerActivityType = function () {
 FinishedMission.prototype.create = function (id_mission, id_user) {
   const insert = 'INSERT INTO finished_missions' +
     ' (date_end, id_user, id_mission)' +
-  ' VALUES ($1, $2, $3)' +
+    ' VALUES ($1, $2, $3)' +
     ' RETURNING *';
 
   const date_end = new Date()
-  const values = [date_end,id_user, id_mission]
+  const values = [date_end, id_user, id_mission]
 
   return new Promise((resolve, reject) => {
     pool.query(insert, values, (error, results) => {

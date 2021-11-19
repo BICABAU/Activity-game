@@ -13,7 +13,6 @@ CourseType.prototype.recuperarTiposCursos = function () {
         reject("Erro ao cadastrar o aluno!")
       } else {
         tipos_cursos_recuperados = results.rows
-        // resolve("Usuário inserido com sucesso!")
         resolve(tipos_cursos_recuperados)
       }
     });

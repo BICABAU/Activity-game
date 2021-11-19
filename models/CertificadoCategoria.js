@@ -14,8 +14,6 @@ CertificadoCategoria.prototype.lerTodasCategoriasAcs = () => {
         reject("Erro ao recuperar as Categorias")
       } else {
         categorias_recuperadas_acs = results.rows
-        console.log(categorias_recuperadas_acs)
-        // resolve("Usuário inserido com sucesso!")
         resolve(categorias_recuperadas_acs)
       }
     });

@@ -26,16 +26,15 @@ Certificado.prototype.create = function () {
 Certificado.prototype.readCatAcsSubCategoria = function (string) {
 
     const consulta = 'SELECT id_activity_types, name_subcategory, id_type FROM activity_types join activities ON (id_type = id_activity_types)' +
-        ` WHERE is_complementary_activity = TRUE AND name = '${string}' OR is_atpas_activity = TRUE AND name = '${string}'`
-    console.log(consulta)
+        ` WHERE is_complementary_activity = TRUE AND name_category = '${string}' OR is_atpas_activity = TRUE AND name_category = '${string}'`
     const values = []
     return new Promise((resolve, reject) => {
         pool.query(consulta, values, (error, results) => {
             if (error) {
                 reject("Erro ao retornar cursos de um determinado tipo!")
+
             } else {
                 subcategoria_recuperada = results.rows
-                console.log(subcategoria_recuperada)
                 resolve(subcategoria_recuperada)
             }
         });
@@ -51,15 +50,15 @@ Certificado.prototype.readAllACs = function (resultado) {
                 reject("Erro ao recuperar os certificados!" + error)
             } else {
                 resultado = results.rows
-                console.log(resultado)
                 resolve(resultado);
             }
         });
     });
 }
 
+
 Certificado.prototype.readCatAes = function () {
-    const consulta = "SELECT name, id_activity_types, is_extension_activity FROM activity_types AS atp WHERE is_extension_activity = TRUE"
+    const consulta = "SELECT name_category, id_activity_types, is_extension_activity FROM activity_types AS atp WHERE is_extension_activity = TRUE"
     return new Promise((resolve, reject) => {
         pool.query(consulta, (error, results) => {
             if (error) {
@@ -73,9 +72,9 @@ Certificado.prototype.readCatAes = function () {
 }
 
 Certificado.prototype.readCatAcs = function () {
-    const consulta = "SELECT name, is_complementary_activity, is_atpas_activity FROM activity_types AS atp" +
+    const consulta = "SELECT name_category, is_complementary_activity, is_atpas_activity FROM activity_types AS atp" +
         " WHERE is_complementary_activity = TRUE OR is_atpas_activity = TRUE" +
-        " GROUP BY name,is_complementary_activity, is_atpas_activity";
+        " GROUP BY name_category,is_complementary_activity, is_atpas_activity";
 
     return new Promise((resolve, reject) => {
         pool.query(consulta, (error, results) => {
@@ -83,16 +82,15 @@ Certificado.prototype.readCatAcs = function () {
                 reject("Não foi possivel ler as categorias" + error)
             } else {
                 resultado_categoria = results.rows
-                console.log(resultado_categoria)
                 resolve(resultado_categoria)
             }
         })
     })
 }
 
-Certificado.prototype.readAllAEs = function () {
-    const consulta = "select id_certification, description, activity_start, activity_end, amount_hours, id_activity, id_uploaded from certifications inner join users on (id_user = $1)";
-    const values = [this.id_user]
+Certificado.prototype.readAllAEs = function (resultado) {
+    const consulta = "select certifications.name, certifications.id_uploaded ,activity_types.name_category from uploaded_certifications join certifications on (id_uploaded = id) join activities on (certifications.id_activity = activities.id_activities) join activity_types on(activities.id_type = activity_types.id_activity_types ) join users on (certifications.id_user_fk = users.id_user) where users.id_user = $1";
+    const values = [resultado.id_user]
     return new Promise((resolve, reject) => {
         pool.query(consulta, values, (error, results) => {
             if (error) {
@@ -106,8 +104,7 @@ Certificado.prototype.readAllAEs = function () {
 }
 
 Certificado.prototype.readAll = function () {
-    const consulta = "select * from uploaded_certifications inner join certifications on (id = id_certification) inner join users on" +
-        "(id_user_fk = id_user) where email = $1"
+    const consulta = "select certifications.name, certifications.description, certifications.activity_start, certifications.activity_end, certifications.amount_hours ,activity_types.name_subcategory, activity_types.name_category  from uploaded_certifications join certifications on (id_uploaded = id) join activities on(certifications.id_activity = activities.id_activities) join activity_types on(activities.id_type = activity_types.id_activity_types) join users on(certifications.id_user_fk = users.id_user) where users.email = $1"
     const values = [this.email]
     return new Promise((resolve, reject) => {
         pool.query(consulta, values, (error, results) => {
@@ -129,8 +126,7 @@ Certificado.prototype.readOneById = function (id_certificado) {
             if (error) {
                 reject("Erro ao recuperar os certificados!" + error)
             } else {
-                resultado = results.rows
-                console.log(resultado)
+                resultado = results.rows[0]
                 resolve(resultado);
             }
         });

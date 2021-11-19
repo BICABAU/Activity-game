@@ -1,7 +1,6 @@
 const Certificado = require('../models/Certificado')
 const User = require('../models/User')
 
-
 exports.getAllAcs = function (req, res) {
     let user = new User(req.session.user)
     user.readByEmail().then((resultado) => {

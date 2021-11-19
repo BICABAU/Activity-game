@@ -2,7 +2,6 @@ const Certificado = require('../models/Certificado')
 const Course = require('../models/Course')
 const User = require('../models/User')
 
-
 exports.cursos_json = function (req, res) {
   let course = new Course()
   course.recuperarCursos(req.params.id_course_types)

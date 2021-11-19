@@ -20,8 +20,6 @@ Academy.prototype.recuperarAcademies = function () {
         reject("Erro ao retornar cursos de um determinado tipo!")
       } else {
         cursos_recuperado = results.rows
-        console.log(cursos_recuperado)
-        // resolve("Usuário inserido com sucesso!")
         resolve(cursos_recuperado)
       }
     });

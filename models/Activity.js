@@ -29,7 +29,6 @@ Activity.prototype.searchOne = function (id_type) {
       if (error) {
         reject("Atividade não encontrada");
       } else {
-        console.log(results.rows[0])
         resolve(results.rows[0]);
 
       }

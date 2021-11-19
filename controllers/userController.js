@@ -36,24 +36,26 @@ exports.home = function (req, res) {
     })
 }
 
-
 exports.estatisticas = function (req, res) {
     res.render('pages/estatisticas')
 }
 
 exports.perfilDoAluno = function (req, res) {
-    if (req.session.user) {
-        res.render('pages/perfilDoAluno')
-    } else {
-        res.render('pages/perfilDoAluno')
-    }
+    let user = new User(req.session.user);
+    user.readByEmail().then((results) => {
+        if (req.session.user) {
+            res.render('pages/perfilDoAluno', { user_info: results })
+        } else {
+            res.render('pages/perfilDoAluno')
+        }
+    })
 }
 
 exports.alterarDados = function (req, res) {
     let user = new User(req.body);
     user
         .alterarDados(), user.readByEmail()
-            .then((result) => {
+            .then((results) => {
                 res.redirect('/perfilDoAluno')
             })
             .catch((err) => {

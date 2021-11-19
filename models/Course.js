@@ -17,8 +17,6 @@ Course.prototype.recuperarCursos = function (id_courses) {
         reject("Erro ao retornar cursos de um determinado tipo!")
       } else {
         cursos_recuperado = results.rows
-        console.log(cursos_recuperado)
-        // resolve("Usuário inserido com sucesso!")
         resolve(cursos_recuperado)
       }
     });
@@ -27,5 +25,23 @@ Course.prototype.recuperarCursos = function (id_courses) {
 
 // Não implementado
 Course.prototype.create = function () { }
+
+Course.prototype.searchCourseByUser = function (email) {
+  const select = 'SELECT * FROM courses JOIN users' +
+    ' ON (courses.id_courses = users.id_course)' +
+    ` WHERE users.email = $1`
+
+  const values = [email];
+
+  return new Promise((resolve, reject) => {
+    pool.query(select, values, (error, results) => {
+      if (error) {
+        reject("Nenhum curso encontrado com este e-mail!")
+      } else {
+        resolve(results.rows[0])
+      }
+    });
+  });
+}
 
 module.exports = Course;

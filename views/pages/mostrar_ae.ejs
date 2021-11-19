@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,49 +10,43 @@
     <link rel="stylesheet" href="/Style/csspages/mostrar_atividades.css">
     <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
 </head>
+
 <body>
     <section class="container_mostrar">
-        <% certificado.forEach(function(certificado){ %>
 
 
-            <div class="div_font">
-                <div class="button_sair">
-                    <a
-                        href="/extensao">
-                        <i class='bx bx-arrow-back' ></i> <span>Voltar</span>
-                    </a>
-                </div>
-                <br> <br> <br>
-
-
-                <div class="background_mostrar_atividades">
-                    <div>
-                        <span>Tipo de Atividade: <%=certificado.tipo_de_atividade %></span>
-                    </div>
-                    <div>
-                        <span>Divisão: <%=certificado.categoria_atividade %></span>
-                    </div>
-                    <div>
-                        <span>Nome: <%=certificado.chave%></span>
-                    </div>
-                    <div>
-                        <span>Quantidade de Horas contabilizadas: <%=certificado.qtd_horas%> horas</span>
-                    </div>
-                    <div>
-                        <span>Tamanho do Documento: <%=certificado.tamanho %> kbs</span>
-                    </div>
-                </div>
-                <br>
-                <div class="button_remover">
-                    <a
-                        href="/apagarCertificadoAEs/<%= certificado.nome %>">
-                        <i class='bx bxs-trash-alt'></i> <span>Deletar</span>
-                    </a>
-                </div>
-
+        <div class="div_font">
+            <div class="button_sair">
+                <a href="/extensao">
+                    <i class='bx bx-arrow-back'></i> <span>Voltar</span>
+                </a>
             </div>
-            <% }); %>
+            <br> <br> <br>
+
+
+            <div class="background_mostrar_atividades">
+                <div>
+                    <span>Nome: <%=certificado.name%></span>
+                </div>
+                <div>
+                    <span>Descrição: <%=certificado.description %></span>
+                </div>
+                <div>
+                    <span>Quantidade de Horas contabilizadas: <%=certificado.amount_valid_hours%> horas</span>
+                </div>
+                <div>
+                    <span>Tamanho do Documento: <%=certificado.size %> kbs</span>
+                </div>
+            </div>
+            <br>
+            <div class="button_remover">
+                <a href="/apagarCertificadoAEs/<%= certificado.id_uploaded %>/<%= certificado.key_name %>">
+                    <i class='bx bxs-trash-alt'></i> <span>Deletar</span>
+                </a>
+            </div>
+
+        </div>
     </section>
 </body>
+
 </html>
-  

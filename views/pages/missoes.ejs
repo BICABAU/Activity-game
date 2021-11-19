@@ -3,48 +3,48 @@
       <div class="header-space">
         <div class="header-mission">
           <h2 class="mission_title">Missões</h2>
-          <p class= "mission_subtitulo">Conclua missões para aumentar sua pontuação!</p>
+          <p class="mission_subtitulo">Conclua missões para aumentar sua pontuação!</p>
         </div>
       </div>
       <div class="mission_container">
         <div class="mission-space">
           <% if(user.curso==1) { %>
-            <p class= "mission_tipo">Atividades Complementares</p>
+            <p class="mission_tipo">Atividades Complementares</p>
             <% } else{ %>
-              <p class= "mission_tipo">Atividades Teórico-Práticas de Aprofundamento (ATPAs)</p>
+              <p class="mission_tipo">Atividades Teórico-Práticas de Aprofundamento (ATPAs)</p>
               <% } %>
                 <div class="mission-info-container">
                   <% missoes.forEach(function(missoes){ %>
                     <% if (user.curso==1) {%>
                       <% if (missoes.is_complementary_activity==true ) {%>
                         <div>
-                          <p class= "mission_conteudo">
+                          <p class="mission_conteudo">
                             <%= missoes.name %>
                           </p>
-                          <button class="btn-box"><i class="bx bx-star"></i></button>
+                          <a href="/postACs"> <button class="btn-box"><i class="bx bx-star"></i></button></a>
                         </div>
                         <% }} else {%>
                           <% if (missoes.is_atpas_activity==true ) {%>
                             <div>
-                              <p class= "mission_conteudo">
+                              <p class="mission_conteudo">
                                 <%= missoes.name %>
                               </p>
-                              <button class="btn-box"><i class="bx bx-star"></i></button>
+                              <a href="/postACs"> <button class="btn-box"><i class="bx bx-star"></i></button></a>
                             </div>
                             <%}}%>
                               <%}) %>
                 </div>
         </div>
         <div class="mission-space-2">
-          <p class= "mission_tipo">Atividades de Extensão</p>
+          <p class="mission_tipo">Atividades de Extensão</p>
           <div class="mission-info-container">
             <% missoes.forEach(function(missoes) {%>
               <% if(missoes.is_extension_activity==true) {%>
 
                 <div>
-                  <p class= "mission_conteudo">
+                  <p class="mission_conteudo">
                     <%= missoes.name %>
-                      <button class="btn-box"><i class="bx bx-star"></i></button>
+                      <a href="/postAEs"> <button class="btn-box"><i class="bx bx-star"></i></button></a>
                   </p>
                 </div>
                 <%}})%>

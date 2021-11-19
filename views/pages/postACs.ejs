@@ -52,18 +52,18 @@
                         <% if (user.curso==1) {%>
                             <% categorias_recuperadas_acs.forEach(categoria_recuperada_acs=> { %>
                                 <% if (categoria_recuperada_acs.is_complementary_activity==true) {%>
-                                    <option value="<%= categoria_recuperada_acs.name%>"
-                                        id="<%= categoria_recuperada_acs.name%>">
-                                        <%= categoria_recuperada_acs.name%>
+                                    <option value="<%= categoria_recuperada_acs.name_category%>"
+                                        id="<%= categoria_recuperada_acs.name_category%>">
+                                        <%= categoria_recuperada_acs.name_category%>
                                     </option>
                                     <% } %>
                                         <% }) %>
                                             <%} else {%>
                                                 <% categorias_recuperadas_acs.forEach(categoria_recuperada_acs=> { %>
                                                     <% if (categoria_recuperada_acs.is_atpas_activity==true) {%>
-                                                        <option value="<%= categoria_recuperada_acs.name%>"
-                                                            id="<%= categoria_recuperada_acs.name%>">
-                                                            <%= categoria_recuperada_acs.name%>
+                                                        <option value="<%= categoria_recuperada_acs.name_category%>"
+                                                            id="<%= categoria_recuperada_acs.name_category%>">
+                                                            <%= categoria_recuperada_acs.name_category%>
                                                         </option>
                                                         <% } %>
                                                             <% }) %>

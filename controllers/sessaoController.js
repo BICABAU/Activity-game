@@ -1,6 +1,5 @@
 const User = require('../models/User')
 
-
 exports.login = function (req, res) {
   let user = new User(req.body);
   user
@@ -12,8 +11,8 @@ exports.login = function (req, res) {
         email: usuarioRecuperado.email,
         curso: usuarioRecuperado.id_course
       }
+
       req.session.save(() => {
-        console.log(req.session.user)
         res.redirect('/home')
       })
     })

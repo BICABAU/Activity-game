@@ -1,165 +1,201 @@
 <%- contentFor('title') %>
-Home
+    Home
 
-<%- contentFor('main') %>
-    <section class="home" id="main">
-        <div class="home-content">
-            <div class="home-titulo">
-                <h2>Confuso?</h2>
-            </div>
-            <div class="home-subtitulo">
-                <p>Veja quais atividades são válidas e quantas horas podem ser contabilizadas de acordo com a resolução!</p>
-            </div>
-            <div class="home-container">
-                <div class="home-tamanho">
-                    <button class="accordion-home">
-                        <%if(user.curso == '1') {%>
-                            Atividades Complementares
-                        <%} else if(user.curso == '2' || user.curso == '3') {%>
-                            Atividades Teórico-Práticas de Aprofundamento (ATPAs)                               
-                        <%}%>
-                    </button>
-                    <div class="panel-home">
-                        <!--Inicio do Painel dos Botões-->
-                        <!--Dependendo do valor esse botão ira mudar de valor-->
+    <%- contentFor('main') %>
+        <section class="home" id="main">
+            <div class="home-content">
+                <div class="home-titulo">
+                    <h2>Confuso?</h2>
+                </div>
+                <div class="home-subtitulo">
+                    <p>Veja quais atividades são válidas e quantas horas podem ser contabilizadas de acordo com a
+                        resolução!</p>
+                </div>
+                <div class="home-container">
+                    <div class="home-tamanho">
                         <button class="accordion-home">
-                            <%if(user.curso == '1') {%>
-                                Atividades de Ensino e Formação Profissional
-                            <%} else{%>
-                                Atividades de Ensino e Iniciação à Docência                                
-                            <%}%>
+                            <%if(user.curso=='1' ) {%>
+                                Atividades Complementares
+                                <%} else if(user.curso=='2' || user.curso=='3' ) {%>
+                                    Atividades Teórico-Práticas de Aprofundamento (ATPAs)
+                                    <%}%>
                         </button>
                         <div class="panel-home">
-                            <div class="container-text">
-                                <!--onde vão ser colocado os valores de Atividades Complementares-->
-                                <% if(user.curso == 1) {%>
-                                       <% ComplementaryRecovered.forEach(function(ComplementaryRecovered){ %>
-                                            <% if(ComplementaryRecovered.name == 'atividades de ensino e formação profissional') {%>
-                                             <p> <%= ComplementaryRecovered.description_subcategory %></p> 
-                                        <% }})%>
-                                    <% } else { %>
-                                        <%AtpasRecovered.forEach(function(AtpasRecovered){ %>
-                                            <% if(AtpasRecovered.name == 'atividades de ensino e iniciação a docência') {%>
-                                                <p>  <%= AtpasRecovered.description_subcategory%></p>
-                                    <% }}) %>
-                                    <%} %>
-                            </div>
-                        </div>
-                        <div>
+                            <!--Inicio do Painel dos Botões-->
+                            <!--Dependendo do valor esse botão ira mudar de valor-->
                             <button class="accordion-home">
-                                <%if(user.curso == '1') {%>
-                                Atividades de Pesquisa
-                            <%} else{%>
-                                Atividades de Pesquisa e Eventos Científicos                              
-                            <%}%>
+                                <%if(user.curso=='1' ) {%>
+                                    Atividades de Ensino e Formação Profissional
+                                    <%} else{%>
+                                        Atividades de Ensino e Iniciação à Docência
+                                        <%}%>
                             </button>
                             <div class="panel-home">
                                 <div class="container-text">
-                                    <% if(user.curso == 1) {%>
+                                    <!--onde vão ser colocado os valores de Atividades Complementares-->
+                                    <% if(user.curso==1) {%>
                                         <% ComplementaryRecovered.forEach(function(ComplementaryRecovered){ %>
-                                             <% if(ComplementaryRecovered.name == 'atividade de pesquisa') {%>
-                                              <p> <%= ComplementaryRecovered.description_subcategory %></p> 
-                                         <% }})%>
-                                     <% } else { %>
-                                         <%AtpasRecovered.forEach(function(AtpasRecovered){ %>
-                                             <% if(AtpasRecovered.name == 'atividades de pesquisa e de eventos cientificos') {%>
-                                                 <p>  <%= AtpasRecovered.description_subcategory%></p>
-                                     <% }}) %>
-                                     <%} %>
+                                            <% if(ComplementaryRecovered.name_category=='atividades de ensino e formação profissional'
+                                                ) {%>
+                                                <p>
+                                                    <%= ComplementaryRecovered.description_subcategory %>
+                                                </p>
+                                                <% }})%>
+                                                    <% } else { %>
+                                                        <%AtpasRecovered.forEach(function(AtpasRecovered){ %>
+                                                            <% if(AtpasRecovered.name_category=='atividades de ensino e iniciação a docência'
+                                                                ) {%>
+                                                                <p>
+                                                                    <%= AtpasRecovered.description_subcategory%>
+                                                                </p>
+                                                                <% }}) %>
+                                                                    <%} %>
+                                </div>
+                            </div>
+                            <div>
+                                <button class="accordion-home">
+                                    <%if(user.curso=='1' ) {%>
+                                        Atividades de Pesquisa
+                                        <%} else{%>
+                                            Atividades de Pesquisa e Eventos Científicos
+                                            <%}%>
+                                </button>
+                                <div class="panel-home">
+                                    <div class="container-text">
+                                        <% if(user.curso==1) {%>
+                                            <% ComplementaryRecovered.forEach(function(ComplementaryRecovered){ %>
+                                                <% if(ComplementaryRecovered.name_category=='atividade de pesquisa' )
+                                                    {%>
+                                                    <p>
+                                                        <%= ComplementaryRecovered.description_subcategory %>
+                                                    </p>
+                                                    <% }})%>
+                                                        <% } else { %>
+                                                            <%AtpasRecovered.forEach(function(AtpasRecovered){ %>
+                                                                <% if(AtpasRecovered.name_category=='atividades de pesquisa e de eventos cientificos'
+                                                                    ) {%>
+                                                                    <p>
+                                                                        <%= AtpasRecovered.description_subcategory%>
+                                                                    </p>
+                                                                    <% }}) %>
+                                                                        <%} %>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <button class="accordion-home">Atividades Outras</button>
+                                <div class="panel-home">
+                                    <div class="container-text">
+                                        <% if(user.curso==1) {%>
+                                            <% ComplementaryRecovered.forEach(function(ComplementaryRecovered){ %>
+                                                <% if(ComplementaryRecovered.name_category=='atividades outros' ) {%>
+                                                    <p>
+                                                        <%= ComplementaryRecovered.description_subcategory %>
+                                                    </p>
+                                                    <% }})%>
+                                                        <% } else { %>
+                                                            <%AtpasRecovered.forEach(function(AtpasRecovered){ %>
+                                                                <% if(AtpasRecovered.name_category=='atividades outras'
+                                                                    ) {%>
+                                                                    <p>
+                                                                        <%= AtpasRecovered.description_subcategory%>
+                                                                    </p>
+                                                                    <% }}) %>
+                                                                        <%} %>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div>
-                            <button class="accordion-home">Atividades Outras</button>
-                            <div class="panel-home">
-                                <div class="container-text">
-                                    <% if(user.curso == 1) {%>
-                                        <% ComplementaryRecovered.forEach(function(ComplementaryRecovered){ %>
-                                             <% if(ComplementaryRecovered.name == 'atividades outros') {%>
-                                              <p> <%= ComplementaryRecovered.description_subcategory %></p> 
-                                         <% }})%>
-                                     <% } else { %>
-                                         <%AtpasRecovered.forEach(function(AtpasRecovered){ %>
-                                             <% if(AtpasRecovered.name == 'atividades outras') {%>
-                                                 <p>  <%= AtpasRecovered.description_subcategory%></p>
-                                     <% }}) %>
-                                     <%} %>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                         <button class="accordion-home">Missões</button>
                         <div class="panel-home">
                             <div class="container-text">
                                 <p>Com duvidas em como cumprir as atividades extracurriculares ou ATPAS? Sem problemas,
-                                    a activity está aqui pra ajudar você, o nosso sistema de missões auxilia você 
-                                    que tem duvida de como começar a realizar as suas atividades. As missões são 
-                                    divididas em duas abas: Missões e Missões Semanais.
+                                    a activity está aqui pra ajudar você, o nosso sistema de missões auxilia você
+                                    que tem duvida de como começar a realizar as suas atividades.
                                 </p>
                                 <p>
-                                    Missões: consiste em trazer todas as atividades extracurriculares em formato de missões que geram pontuações
+                                    As missões consistem em trazer todas as atividades extracurriculares em formato de
+                                    missões que geram pontuações
                                     para você subir para o topo do nosso ranking
                                 </p>
-                                <p>
-                                    Missões Semanais: Toda semana iremos retirar algumas missões para você realizar de forma opcional, para caso fique na duvida de como começar a realizar a
-                                    realizar as missões
-                                </p>
-                                <p>
-                                    Após as missões serem realizadas, você irá receber pontos que vão mostrar o seu progresso, além de colocar você cada vez mais perto do 1° lugar no ranking da nossa plataforma
-                                </p>
-                                </div>
-                        </div>
-                </div>
-                <div class="home-tamanho">
-                    <button class="accordion-home">Atividades de Extensão</button>
-                    <div class="panel-home">
-                        <!-- Inicio do Painel de Botões -->
-                        <button class="accordion-home">Projeto</button>
-                        <div class="panel-home">
-                            <div class="container-text">
-                                <p>
-                                    O Projeto é um conjunto de ações processuais contínuas, de caráter educativo, social, cultural, científico ou tecnológico, com objetivo específico e prazo determinado, que podem ser realizadas isoladamente ou estar vinculadas a programa de extensão;
-                                </p>
-                            </div>
-                        </div>
-                        <button class="accordion-home">Programa</button>
-                        <div class="panel-home">
-                            <div class="container-text">
-                                <p>
-                                    O Programa é um conjunto de projetos de caráter orgânico-institucional, com diretrizes claras e voltadas a um objetivo comum, podendo compreender, ou não, subprogramas. São ações, preferencialmente, de caráter multidisciplinar e integradas a atividades
-                                    de pesquisa e de ensino, sendo executadas a médio e longo prazo;
-                                </p>
-                            </div>
-                        </div>
-                        <button class="accordion-home">Curso</button>
-                        <div class="panel-home">
-                            <div class="container-text">
-                                <p>
-                                    O curso é um conjunto articulado de ações pedagógicas, de caráter teórico e/ou prático, presenciais ou a distância, planejadas e organizadas de maneira sistemática, orientadas por professor do curso, com carga horária mínima de 20 horas e com critérios
-                                    de avaliação definidos;
-                                </p>
-                            </div>
-                        </div>
-                        <button class="accordion-home">Evento</button>
-                        <div class="panel-home">
-                            <div class="container-text">
-                                <p>
-                                    O Evento são ações de cunho cultural, artístico, científico, educacional ou tecnológico, desenvolvidas sob a forma de ciclo de estudo, conferência, congresso, debate, encontro, seminário, feira, fórum, jornada, mesa redonda, palestra, dentre outras ações
-                                    que contribuam para disseminação do conhecimento.
-                                </p>
                             </div>
                         </div>
                     </div>
-                    <div>
-                        <button class="accordion-home">Outras Informações</button>
+                    <div class="home-tamanho">
+                        <button class="accordion-home">Atividades de Extensão</button>
                         <div class="panel-home">
-                            <div class="container-text">
-                                <p>isso é um teste</p>
+                            <!-- Inicio do Painel de Botões -->
+                            <button class="accordion-home">Projeto</button>
+                            <div class="panel-home">
+                                <div class="container-text">
+                                    <p>
+                                        O Projeto é um conjunto de ações processuais contínuas, de caráter educativo,
+                                        social, cultural, científico ou tecnológico, com objetivo específico e prazo
+                                        determinado, que podem ser realizadas isoladamente ou estar vinculadas a
+                                        programa de extensão;
+                                    </p>
                                 </div>
+                            </div>
+                            <button class="accordion-home">Programa</button>
+                            <div class="panel-home">
+                                <div class="container-text">
+                                    <p>
+                                        O Programa é um conjunto de projetos de caráter orgânico-institucional, com
+                                        diretrizes claras e voltadas a um objetivo comum, podendo compreender, ou não,
+                                        subprogramas. São ações, preferencialmente, de caráter multidisciplinar e
+                                        integradas a atividades
+                                        de pesquisa e de ensino, sendo executadas a médio e longo prazo;
+                                    </p>
+                                </div>
+                            </div>
+                            <button class="accordion-home">Curso</button>
+                            <div class="panel-home">
+                                <div class="container-text">
+                                    <p>
+                                        O curso é um conjunto articulado de ações pedagógicas, de caráter teórico e/ou
+                                        prático, presenciais ou a distância, planejadas e organizadas de maneira
+                                        sistemática, orientadas por professor do curso, com carga horária mínima de 20
+                                        horas e com critérios
+                                        de avaliação definidos;
+                                    </p>
+                                </div>
+                            </div>
+                            <button class="accordion-home">Evento</button>
+                            <div class="panel-home">
+                                <div class="container-text">
+                                    <p>
+                                        O Evento são ações de cunho cultural, artístico, científico, educacional ou
+                                        tecnológico, desenvolvidas sob a forma de ciclo de estudo, conferência,
+                                        congresso, debate, encontro, seminário, feira, fórum, jornada, mesa redonda,
+                                        palestra, dentre outras ações
+                                        que contribuam para disseminação do conhecimento.
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>
+                        <div>
+                            <button class="accordion-home">Outras Informações</button>
+                            <div class="panel-home">
+                                <div class="container-text">
+                                    <p>Estatisticas: Serão colocados todos os seus certificados dividos por pastas onde
+                                        você
+                                        pode visualizar informações mais detalhadas sobre cada um.</p>
 
-        </div>
-    </section>
+                                    <p>
+                                        Ranking: Serão colocados todos os alunos do seu curso escolhido,
+                                        onde dependendo de sua pontuação, vão possuir uma posição no ranking. Para
+                                        chegar no topo, cumpra as missões e acumule pontos para chegar no topo!!!
+                                    </p>
+                                    <p>
+                                        Atualizações: Na aba de atualizações, vai ser colocadas todas as novidades que
+                                        estão sendo implementadas dentro da plataforma, então fique sempre de olho para
+                                        poder desfrutas das novas funcionalidades que iremos adicionar
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>

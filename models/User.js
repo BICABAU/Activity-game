@@ -71,7 +71,6 @@ User.prototype.readByEmail = function (email) {
             if (error) {
                 reject("E-mail não encontrado");
             } else {
-                console.log(results)
                 resolve(results.rows[0]);
 
             }
@@ -83,8 +82,8 @@ User.prototype.alterarDados = function () {
 
     let salt = bcrypt.genSaltSync(10)
     this.data.senha = bcrypt.hashSync(this.data.senha, salt)
-    const consulta = "UPDATE users set nome=$1, nascimento=$2, senha=$3 WHERE email=$4";
-    const values = [this.data.nome, this.data.nascimento, this.data.senha, this.data.email];
+    const consulta = "UPDATE users set first_name=$1, last_name=$2, email=$3, cpf=$4, phone=$5, password_hash=$6 WHERE email=$3";
+    const values = [this.first_name, this.last_name, this.email, this.cpf, this.phone, this.password_hash];
     console.log(consulta)
 
     return new Promise((resolve, reject) => {
@@ -104,7 +103,7 @@ User.prototype.getTotalHours = function (email) {
      * -> Horas Complementares
      * -> Horas de extensão
      */
-    const select = "select complementary_activity, extension_activity from users where email = $1"
+    const select = "SELECT complementary_activity, extension_activity FROM users WHERE email = $1"
     const values = [email];
 
     return new Promise((resolve, reject) => {
@@ -112,9 +111,10 @@ User.prototype.getTotalHours = function (email) {
             if (error) {
                 reject("E-mail não encontrado");
             } else {
-                hours_recovered = results.rows[0]
-                console.log(hours_recovered)
-                resolve(hours_recovered)
+                // hours_recovered = results.rows[0]
+                // console.log(hours_recovered)
+                // console.log(results.rows[0])
+                resolve(results.rows[0])
 
             }
         });
@@ -128,7 +128,6 @@ User.prototype.countExtensionHours = function () { }
 
 User.prototype.countAmountPoints = function (current_total_amount, rewards, id_user) {
     const update = "UPDATE users SET points_total_amount = points_total_amount + $1  WHERE id_user = $2";
-
 
     const values = [rewards, id_user];
 

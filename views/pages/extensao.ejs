@@ -18,22 +18,19 @@
                         </button>
                         <div class="panel">
                             <% certificado.forEach(function(certificado){ %>
-                                <% if (name_subcategory=='Programa' ) {%>
+                                <% if (certificado.name_category=='programa' ) {%>
                                     <div class="panel-documentos">
                                         <div class="text-documents">
                                             <span><i class='bx bxs-file-pdf'></i>
                                                 <%= certificado.name %>
                                             </span>
-                                            <span>
-                                                <%= certificado.criado_em %>
-                                            </span>
-                                            <a href="/mostrar_ae/<%= certificado %>"> <i class='bx bx-plus'></i> Mais
+
+                                            <a href="/mostrar_ae/<%= certificado.id_uploaded %>"> <i
+                                                    class='bx bx-plus'></i> Mais
                                                 informações </a>
                                         </div>
                                     </div>
                                     <% }}); %>
-
-
                         </div>
 
                         <button class="accordion">
@@ -41,14 +38,15 @@
                         </button>
                         <div class="panel">
                             <% certificado.forEach(function(certificado){ %>
-                                <% if (name_subcategory=='Projeto' ) {%>
+                                <% if (certificado.name_category=='projeto' ) {%>
                                     <div class="panel-documentos">
                                         <div class="text-documents">
                                             <span><i class='bx bxs-file-pdf'></i>
                                                 <%= certificado.name %>
                                             </span>
 
-                                            <a href="/mostrar_ae/<%= certificado %>"> <i class='bx bx-plus'></i> Mais
+                                            <a href="/mostrar_ae/<%= certificado.id_uploaded %>"> <i
+                                                    class='bx bx-plus'></i> Mais
                                                 informações </a>
                                         </div>
                                     </div>
@@ -56,18 +54,39 @@
                         </div>
 
                         <button class="accordion">
-                            <i class="bx bxs-folder-open"></i>Curso
+                            <i class="bx bxs-folder-open"></i>Organização de Curso
                         </button>
                         <div class="panel">
                             <% certificado.forEach(function(certificado){ %>
-                                <% if (name_subcategory=='Curso' ) {%>
+                                <% if (certificado.name_category=='curso' ) {%>
                                     <div class="panel-documentos">
                                         <div class="text-documents">
                                             <span><i class='bx bxs-file-pdf'></i>
                                                 <%= certificado.name %>
                                             </span>
 
-                                            <a href="/mostrar_ae/<%= certificado %>"> <i class='bx bx-plus'></i> Mais
+                                            <a href="/mostrar_ae/<%= certificado.id_uploaded %>"> <i
+                                                    class='bx bx-plus'></i> Mais
+                                                informações </a>
+                                        </div>
+                                    </div>
+                                    <% }}); %>
+                        </div>
+
+                        <button class="accordion">
+                            <i class="bx bxs-folder-open"></i>Execução de Curso
+                        </button>
+                        <div class="panel">
+                            <% certificado.forEach(function(certificado){ %>
+                                <% if (certificado.name_category=='execução de curso' ) {%>
+                                    <div class="panel-documentos">
+                                        <div class="text-documents">
+                                            <span><i class='bx bxs-file-pdf'></i>
+                                                <%= certificado.name %>
+                                            </span>
+
+                                            <a href="/mostrar_ae/<%= certificado.id_uploaded %>"> <i
+                                                    class='bx bx-plus'></i> Mais
                                                 informações </a>
                                         </div>
                                     </div>
@@ -79,14 +98,15 @@
                         </button>
                         <div class="panel">
                             <% certificado.forEach(function(certificado){ %>
-                                <% if (name_subcategory=='Evento' ) {%>
+                                <% if (certificado.name_category=='evento' ) {%>
                                     <div class="panel-documentos">
                                         <div class="text-documents">
                                             <span><i class='bx bxs-file-pdf'></i>
                                                 <%= certificado.name %>
                                             </span>
 
-                                            <a href="/mostrar_ae/<%= certificado %>"> <i class='bx bx-plus'></i> Mais
+                                            <a href="/mostrar_ae/<%= certificado.id_uploaded %>"> <i
+                                                    class='bx bx-plus'></i> Mais
                                                 informações </a>
                                         </div>
                                     </div>
@@ -98,14 +118,15 @@
                         </button>
                         <div class="panel">
                             <% certificado.forEach(function(certificado){ %>
-                                <% if (name_subcategory=='Prestação de Serviço' ) {%>
+                                <% if (certificado.name_category=='prestação de serviço' ) {%>
                                     <div class="panel-documentos">
                                         <div class="text-documents">
                                             <span><i class='bx bxs-file-pdf'></i>
                                                 <%= certificado.name %>
                                             </span>
 
-                                            <a href="/mostrar_ae/<%= certificado %>"> <i class='bx bx-plus'></i> Mais
+                                            <a href="/mostrar_ae/<%= certificado.id_uploaded %>"> <i
+                                                    class='bx bx-plus'></i> Mais
                                                 informações </a>
                                         </div>
                                     </div>
