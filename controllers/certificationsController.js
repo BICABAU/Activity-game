@@ -71,7 +71,7 @@ exports.uploadCertification = function (req, res) {
                     .then(searchedCourse => {
                       certification.hoursValidation(certification_created.amount_hours, searchedActivity, searched_user, searchedCourse)
                         .then(({ results, typeActivity, amount_valid_hours }) => {
-                    
+
 
                           certification.setAmountValidHours(certification_created.id_certification, amount_valid_hours)
                             .then(results => {
@@ -86,7 +86,7 @@ exports.uploadCertification = function (req, res) {
 
                   mission.missionValidate(searched_user.id_user, certification_created.id_certification)
                     .then((mission_validated) => {
-      
+
                       finishedMission.create(mission_validated.id_mission, searched_user.id_user)
                         .then((finished_mission_created) => {
                           user.countAmountPoints(searched_user.points_total_amount, mission_validated.rewards_points, searched_user.id_user)
