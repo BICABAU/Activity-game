@@ -56,18 +56,19 @@
                                                                 <i class='bx bx-plus'></i> Mais informações </a>
                                                         </div>
                                                     </div>
-                                                    <% } else if (certificado.name_subcategory=='disciplinas de graduação') { %>
+                                                    <% } else if
+                                                        (certificado.name_subcategory=='disciplinas de graduação' ) { %>
                                                         <div class="panel-documentos">
                                                             <div class="text-documents">
                                                                 <span><i class='bx bxs-file-pdf'></i>
                                                                     <%= certificado.name %>
                                                                 </span>
-    
+
                                                                 <a href="/mostrar_ac/<%= certificado.id_uploaded %>">
                                                                     <i class='bx bx-plus'></i> Mais informações </a>
                                                             </div>
                                                         </div>
-                                                    <% }}); %>
+                                                        <% }}); %>
                                         </div>
                                         <button class="accordion">
                                             <i class="bx bxs-folder-open"></i>
@@ -89,7 +90,8 @@
                                                                 <i class='bx bx-plus'></i> Mais informações </a>
                                                         </div>
                                                     </div>
-                                                    <% } else if (certificado.name_subcategory=='monitoria acadêmica') { %>
+                                                    <% } else if (certificado.name_subcategory=='monitoria acadêmica' )
+                                                        { %>
                                                         <div class="panel-documentos">
                                                             <div class="text-documents">
                                                                 <span><i class='bx bxs-file-pdf'></i>
@@ -99,7 +101,7 @@
                                                                     <i class='bx bx-plus'></i> Mais informações </a>
                                                             </div>
                                                         </div>
-                                               <% }}); %>
+                                                        <% }}); %>
                                         </div>
                                         <button class="accordion">
                                             <i class="bx bxs-folder-open"></i>
@@ -121,7 +123,8 @@
                                                                 <i class='bx bx-plus'></i> Mais informações </a>
                                                         </div>
                                                     </div>
-                                                    <% } else if (certificado.name_subcategory=='cursos de linguagens') { %>
+                                                    <% } else if (certificado.name_subcategory=='cursos de linguagens' )
+                                                        { %>
                                                         <div class="panel-documentos">
                                                             <div class="text-documents">
                                                                 <span><i class='bx bxs-file-pdf'></i>
@@ -131,7 +134,7 @@
                                                                     <i class='bx bx-plus'></i> Mais informações </a>
                                                             </div>
                                                         </div>
-                                               <% }}); %>
+                                                        <% }}); %>
                                         </div>
                                         <button class="accordion">
                                             <i class="bx bxs-folder-open"></i>
@@ -153,7 +156,9 @@
                                                                 <i class='bx bx-plus'></i> Mais informações </a>
                                                         </div>
                                                     </div>
-                                                    <% } else if (certificado.name_subcategory=='bolsa de iniciação a docência') { %>
+                                                    <% } else if
+                                                        (certificado.name_subcategory=='bolsa de iniciação a docência' )
+                                                        { %>
                                                         <div class="panel-documentos">
                                                             <div class="text-documents">
                                                                 <span><i class='bx bxs-file-pdf'></i>
@@ -163,7 +168,7 @@
                                                                     <i class='bx bx-plus'></i> Mais informações </a>
                                                             </div>
                                                         </div>
-                                               <% }}); %>
+                                                        <% }}); %>
                                         </div>
                                         <button class="accordion">
                                             <i class="bx bxs-folder-open"></i>
@@ -187,7 +192,7 @@
                                                                 <i class='bx bx-plus'></i> Mais informações </a>
                                                         </div>
                                                     </div>
-                                                    <% } else if (certificado.name_subcategory=='minicursos') { %>
+                                                    <% } else if (certificado.name_subcategory=='minicursos' ) { %>
                                                         <div class="panel-documentos">
                                                             <div class="text-documents">
                                                                 <span><i class='bx bxs-file-pdf'></i>
@@ -197,7 +202,7 @@
                                                                     <i class='bx bx-plus'></i> Mais informações </a>
                                                             </div>
                                                         </div>
-                                               <% }}); %>
+                                                        <% }}); %>
                                         </div>
                                         <%if (user.curso=='2' || user.curso=='3' ){%>
                                             <button class="accordion">
@@ -206,9 +211,7 @@
                                             <%}%>
                                                 <div class="panel">
                                                     <% certificado.forEach(function(certificado){ %>
-                                                        <% if
-                                                            (certificado.name_subcategory=='Estágio voluntário'
-                                                            ) {%>
+                                                        <% if (certificado.name_subcategory=='Estágio voluntário' ) {%>
                                                             <div class="panel-documentos">
                                                                 <div class="text-documents">
                                                                     <span><i class='bx bxs-file-pdf'></i>
@@ -219,7 +222,7 @@
                                                                         <i class='bx bx-plus'></i> Mais informações </a>
                                                                 </div>
                                                             </div>
-                                                       <% }}); %>
+                                                            <% }}); %>
 
                                                 </div>
                                     </div>
@@ -243,7 +246,7 @@
                                         </button>
                                         <div class="panel">
                                             <% certificado.forEach(function(certificado){ %>
-                                                <% if (certificado.name_subcategory=='bolsista do projeto') {%>
+                                                <% if (certificado.name_subcategory=='bolsista do projeto' ) {%>
                                                     <div class="panel-documentos">
                                                         <div class="text-documents">
                                                             <span><i class='bx bxs-file-pdf'></i>
@@ -253,7 +256,9 @@
                                                                 <i class='bx bx-plus'></i> Mais informações </a>
                                                         </div>
                                                     </div>
-                                                    <% } else if (certificado.name_subcategory=='participação em projetos de pesquisa') { %>
+                                                    <% } else if
+                                                        (certificado.name_subcategory=='participação em projetos de pesquisa'
+                                                        ) { %>
                                                         <div class="panel-documentos">
                                                             <div class="text-documents">
                                                                 <span><i class='bx bxs-file-pdf'></i>
@@ -263,7 +268,7 @@
                                                                     <i class='bx bx-plus'></i> Mais informações </a>
                                                             </div>
                                                         </div>
-                                               <% }}); %>
+                                                        <% }}); %>
                                         </div>
                                         <button class="accordion">
                                             <i class="bx bxs-folder-open"></i>
@@ -285,7 +290,9 @@
                                                                 <i class='bx bx-plus'></i> Mais informações </a>
                                                         </div>
                                                     </div>
-                                                    <% } else if (certificado.name_subcategory=='participação voluntária em projetos de pesquisa') { %>
+                                                    <% } else if
+                                                        (certificado.name_subcategory=='participação voluntária em projetos de pesquisa'
+                                                        ) { %>
                                                         <div class="panel-documentos">
                                                             <div class="text-documents">
                                                                 <span><i class='bx bxs-file-pdf'></i>
@@ -295,7 +302,7 @@
                                                                     <i class='bx bx-plus'></i> Mais informações </a>
                                                             </div>
                                                         </div>
-                                               <% }}); %>
+                                                        <% }}); %>
                                         </div>
                                         <button class="accordion">
                                             <i class="bx bxs-folder-open"></i>
@@ -319,7 +326,9 @@
                                                                 <i class='bx bx-plus'></i> Mais informações </a>
                                                         </div>
                                                     </div>
-                                                    <% } else if (certificado.name_subcategory=='participação como ouvinte em eventos científicos') { %>
+                                                    <% } else if
+                                                        (certificado.name_subcategory=='participação como ouvinte em eventos científicos'
+                                                        ) { %>
                                                         <div class="panel-documentos">
                                                             <div class="text-documents">
                                                                 <span><i class='bx bxs-file-pdf'></i>
@@ -329,7 +338,7 @@
                                                                     <i class='bx bx-plus'></i> Mais informações </a>
                                                             </div>
                                                         </div>
-                                               <% }}); %>
+                                                        <% }}); %>
                                         </div>
                                         <button class="accordion">
                                             <i class="bx bxs-folder-open"></i>
@@ -351,7 +360,9 @@
                                                                 <i class='bx bx-plus'></i> Mais informações </a>
                                                         </div>
                                                     </div>
-                                                    <% } else if (certificado.name_subcategory=='participação voluntária na organização de eventos científicos') { %>
+                                                    <% } else if
+                                                        (certificado.name_subcategory=='participação voluntária na organização de eventos científicos'
+                                                        ) { %>
                                                         <div class="panel-documentos">
                                                             <div class="text-documents">
                                                                 <span><i class='bx bxs-file-pdf'></i>
@@ -361,7 +372,7 @@
                                                                     <i class='bx bx-plus'></i> Mais informações </a>
                                                             </div>
                                                         </div>
-                                               <% }}); %>
+                                                        <% }}); %>
                                         </div>
                                         <button class="accordion">
                                             <i class="bx bxs-folder-open"></i>
@@ -383,7 +394,9 @@
                                                                 <i class='bx bx-plus'></i> Mais informações </a>
                                                         </div>
                                                     </div>
-                                                    <% } else if (certificado.name_subcategory=='publicação em periódicos com ISSN') { %>
+                                                    <% } else if
+                                                        (certificado.name_subcategory=='publicação em periódicos com ISSN'
+                                                        ) { %>
                                                         <div class="panel-documentos">
                                                             <div class="text-documents">
                                                                 <span><i class='bx bxs-file-pdf'></i>
@@ -393,7 +406,7 @@
                                                                     <i class='bx bx-plus'></i> Mais informações </a>
                                                             </div>
                                                         </div>
-                                               <% }}); %>
+                                                        <% }}); %>
                                         </div>
                                         <button class="accordion">
                                             <i class="bx bxs-folder-open"></i>
@@ -417,7 +430,9 @@
                                                                 <i class='bx bx-plus'></i> Mais informações </a>
                                                         </div>
                                                     </div>
-                                                    <% } else if (certificado.name_subcategory=='publicação em anais de eventos científicos') { %>
+                                                    <% } else if
+                                                        (certificado.name_subcategory=='publicação em anais de eventos científicos'
+                                                        ) { %>
                                                         <div class="panel-documentos">
                                                             <div class="text-documents">
                                                                 <span><i class='bx bxs-file-pdf'></i>
@@ -427,7 +442,7 @@
                                                                     <i class='bx bx-plus'></i> Mais informações </a>
                                                             </div>
                                                         </div>
-                                               <% }}); %>
+                                                        <% }}); %>
                                         </div>
                                         <button class="accordion">
                                             <i class="bx bxs-folder-open"></i>
@@ -449,7 +464,9 @@
                                                                 <i class='bx bx-plus'></i> Mais informações </a>
                                                         </div>
                                                     </div>
-                                                    <% } else if (certificado.name_subcategory=='publicação de livro ou capítulo de livro') { %>
+                                                    <% } else if
+                                                        (certificado.name_subcategory=='publicação de livro ou capítulo de livro'
+                                                        ) { %>
                                                         <div class="panel-documentos">
                                                             <div class="text-documents">
                                                                 <span><i class='bx bxs-file-pdf'></i>
@@ -459,7 +476,7 @@
                                                                     <i class='bx bx-plus'></i> Mais informações </a>
                                                             </div>
                                                         </div>
-                                               <% }}); %>
+                                                        <% }}); %>
                                         </div>
                                         <%if (user.curso=='2' || user.curso=='3' ){%>
                                             <button class="accordion">
@@ -482,7 +499,7 @@
                                                                         <i class='bx bx-plus'></i> Mais informações </a>
                                                                 </div>
                                                             </div>
-                                                       <% }}); %>
+                                                            <% }}); %>
 
                                                 </div>
                                                 <%if (user.curso=='2' || user.curso=='3' ){%>
@@ -507,7 +524,7 @@
                                                                                 informações </a>
                                                                         </div>
                                                                     </div>
-                                                               <% }}); %>
+                                                                    <% }}); %>
 
                                                         </div>
                                                         <%if (user.curso=='2' || user.curso=='3' ){%>
@@ -525,7 +542,7 @@
                                                                                 <div class="text-documents">
                                                                                     <span><i
                                                                                             class='bx bxs-file-pdf'></i>
-                                                                                            <%= certificado.name %>
+                                                                                        <%= certificado.name %>
                                                                                             %>
                                                                                     </span>
                                                                                     <a
@@ -534,7 +551,7 @@
                                                                                         informações </a>
                                                                                 </div>
                                                                             </div>
-                                                                       <% }}); %>
+                                                                            <% }}); %>
 
                                                                 </div>
                                                                 <%if (user.curso=='2' || user.curso=='3' ){%>
@@ -553,7 +570,7 @@
                                                                                         <div class="text-documents">
                                                                                             <span><i
                                                                                                     class='bx bxs-file-pdf'></i>
-                                                                                                    <%= certificado.name %>
+                                                                                                <%= certificado.name %>
                                                                                             </span>
                                                                                             <a
                                                                                                 href="/mostrar_ac/<%= certificado.id_uploaded %>">
@@ -582,7 +599,8 @@
                                                                                                     class="text-documents">
                                                                                                     <span><i
                                                                                                             class='bx bxs-file-pdf'></i>
-                                                                                                            <%= certificado.name %>
+                                                                                                        <%= certificado.name
+                                                                                                            %>
                                                                                                     </span>
                                                                                                     <a
                                                                                                         href="/mostrar_ac/<%= certificado.id_uploaded %>">
@@ -593,9 +611,9 @@
                                                                                                 </div>
                                                                                             </div>
                                                                                             <% }})%>
-                                                
+
+                                                                                </div>
                                     </div>
-                                </div>
                                     <button class="accordion">
                                         <i class="bx bxs-folder-open"></i>Atividades Outros
                                     </button>
@@ -611,9 +629,10 @@
                                         </button>
                                         <div class="panel">
                                             <% certificado.forEach(function(certificado){ %>
-                                               
-                                                <% if    (certificado.name_subcategory=='organização de eventos esportivos e/ou culturais junto ao IFPI')
-                                                     {%>
+
+                                                <% if
+                                                    (certificado.name_subcategory=='organização de eventos esportivos e/ou culturais junto ao IFPI'
+                                                    ) {%>
                                                     <div class="panel-documentos">
                                                         <div class="text-documents">
                                                             <span><i class='bx bxs-file-pdf'></i>
@@ -623,7 +642,9 @@
                                                                 <i class='bx bx-plus'></i> Mais informações </a>
                                                         </div>
                                                     </div>
-                                                    <% } else if (certificado.name_subcategory=='participação voluntária na organização de eventos esportivos ou culturais') { %>
+                                                    <% } else if
+                                                        (certificado.name_subcategory=='participação voluntária na organização de eventos esportivos ou culturais'
+                                                        ) { %>
                                                         <div class="panel-documentos">
                                                             <div class="text-documents">
                                                                 <span><i class='bx bxs-file-pdf'></i>
@@ -633,7 +654,7 @@
                                                                     <i class='bx bx-plus'></i> Mais informações </a>
                                                             </div>
                                                         </div>
-                                               <% }}); %>
+                                                        <% }}); %>
                                         </div>
                                         <button class="accordion">
                                             <i class="bx bxs-folder-open"></i>
@@ -658,7 +679,9 @@
                                                                 <i class='bx bx-plus'></i> Mais informações </a>
                                                         </div>
                                                     </div>
-                                                    <% } else if (certificado.name_subcategory=='participação voluntária na organização de eventos esportivos ou culturais') { %>
+                                                    <% } else if
+                                                        (certificado.name_subcategory=='participação voluntária na organização de eventos esportivos ou culturais'
+                                                        ) { %>
                                                         <div class="panel-documentos">
                                                             <div class="text-documents">
                                                                 <span><i class='bx bxs-file-pdf'></i>
@@ -668,7 +691,7 @@
                                                                     <i class='bx bx-plus'></i> Mais informações </a>
                                                             </div>
                                                         </div>
-                                               <% }}); %>
+                                                        <% }}); %>
                                         </div>
                                         <button class="accordion">
                                             <i class="bx bxs-folder-open"></i>
@@ -693,7 +716,9 @@
                                                                 <i class='bx bx-plus'></i> Mais informações </a>
                                                         </div>
                                                     </div>
-                                                    <% } else if (certificado.name_subcategory=='participação voluntária em eventos filantrópicos desenvolvidos no âmbito do IFPI') { %>
+                                                    <% } else if
+                                                        (certificado.name_subcategory=='participação voluntária em eventos filantrópicos desenvolvidos no âmbito do IFPI'
+                                                        ) { %>
                                                         <div class="panel-documentos">
                                                             <div class="text-documents">
                                                                 <span><i class='bx bxs-file-pdf'></i>
@@ -703,14 +728,14 @@
                                                                     <i class='bx bx-plus'></i> Mais informações </a>
                                                             </div>
                                                         </div>
-                                               <% }}); %>
+                                                        <% }}); %>
                                         </div>
                                         <button class="accordion">
                                             <i class="bx bxs-folder-open"></i>Visitas Técnicas
                                         </button>
                                         <div class="panel">
                                             <% certificado.forEach(function(certificado){ %>
-                                                <% if (certificado.name_subcategory=='visitas técnicas') {%>
+                                                <% if (certificado.name_subcategory=='visitas técnicas' ) {%>
                                                     <div class="panel-documentos">
                                                         <div class="text-documents">
                                                             <span><i class='bx bxs-file-pdf'></i>
@@ -720,7 +745,7 @@
                                                                 <i class='bx bx-plus'></i> Mais informações </a>
                                                         </div>
                                                     </div>
-                                               <% }}); %>
+                                                    <% }}); %>
                                         </div>
                                     </div>
                                 </div>
