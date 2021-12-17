@@ -43,3 +43,12 @@ exports.apagarCertificadoAes = function (req, res) {
             res.send(err)
         })
 };
+
+exports.baixarCertificadoAes = function (req, res) {
+    const key_name = req.params.key_name
+    let certificado = new Certificado(null, null, req.session.user.email)
+      certificado.baixarAws(key_name).then((resultado) => {
+            res.send(resultado.Body)
+        })
+        
+};

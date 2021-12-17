@@ -58,6 +58,8 @@ router.get('/atividadesComplementares', mustBeLoggedIn, certificadosAcsControlle
 router.get('/extensao', mustBeLoggedIn, certificadosAesController.getAllAes)
 router.get('/mostrar_ac/:id_uploaded', mustBeLoggedIn, certificadosAcsController.getByIdAc)
 router.get('/mostrar_ae/:id_uploaded', mustBeLoggedIn, certificadosAesController.getByIdAe)
+router.get('/baixarCertificadoACs/:id_uploaded/:key_name', mustBeLoggedIn,certificadosAcsController.baixarCertificadoAcs)
+router.get('/baixarCertificadoAEs/:id_uploaded/:key_name', mustBeLoggedIn,certificadosAesController.baixarCertificadoAes)
 router.get('/apagarCertificadoACs/:id_uploaded/:key_name', mustBeLoggedIn, certificadosAcsController.apagarCertificadoAcs)
 router.get('/apagarCertificadoAEs/:id_uploaded/:key_name', mustBeLoggedIn, certificadosAesController.apagarCertificadoAes)
 

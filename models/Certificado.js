@@ -169,6 +169,21 @@ Certificado.prototype.apagarAws = function (name) {
     }).promise()
 }
 
+Certificado.prototype.baixarAws = function (name) {
+    var getParams = {
+        Bucket: 'upload-server-ifpi',
+        Key: name,
+    }
+    s3.getObject(getParams, function(err, res){
+        if (err === null) {
+            res.attachment('file.ext'); // or whatever your logic needs
+            res.send(data.Body);
+         } else {
+            res.status(500).send(err);
+         }
+    }).promise()
+}
+
 Certificado.prototype.removerHorasACs = function (id) {
     const consulta = "UPDATE users SET complementary_activity = complementary_activity - amount_hours FROM certifications u where u.id_uploaded = $1 AND email = $2"
     const values = [id, this.email]
