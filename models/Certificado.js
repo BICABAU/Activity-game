@@ -174,14 +174,21 @@ Certificado.prototype.baixarAws = function (name) {
         Bucket: 'upload-server-ifpi',
         Key: name,
     }
-    s3.getObject(getParams, function(err, res){
-        if (err === null) {
-            res.attachment('file.ext'); // or whatever your logic needs
-            res.send(data.Body);
-         } else {
-            res.status(500).send(err);
-         }
-    }).promise()
+
+    return new Promise((resolve, reject) => {
+        s3.getObject(getParams, function (err, res) {
+            // console.log(res);
+            if (err === null) {
+                resolve(res.Body);
+                // res.attachment('file.ext'); // or whatever your logic needs
+                // res.send(data.Body);
+            } else {
+                reject(err);
+                // res.status(500).send(err);
+            }
+        })
+    })
+
 }
 
 Certificado.prototype.removerHorasACs = function (id) {
