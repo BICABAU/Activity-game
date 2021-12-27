@@ -48,8 +48,10 @@ exports.apagarCertificadoAcs = function (req, res) {
 exports.baixarCertificadoAcs = function (req, res) {
     const key_name = req.params.key_name
     let certificado = new Certificado(null, null, req.session.user.email)
-      certificado.baixarAws(key_name)
-        .then((resultado) => {
+    certificado.baixarAws(key_name)
+        .then((file) => {
+            res.attachment('file.ext'); // or whatever your logic needs
+            res.sendFile(file);
             res.redirect('/home')
         })
         .catch((err) => {
